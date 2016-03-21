@@ -1,0 +1,10 @@
+[Unit]
+Description=The Etcd Server container
+After=docker.service
+
+[Service]
+ExecStart=/usr/bin/docker start TEMPLATE
+ExecStop=/usr/bin/docker stop TEMPLATE
+
+[Install]
+WantedBy=multi-user.target
