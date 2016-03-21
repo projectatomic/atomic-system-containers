@@ -101,8 +101,8 @@
 		},
 		{
 			"type": "bind",
-			"source": "/var/lib/etcd",
-			"destination": "/var/lib/etcd",
+			"source": "/var/lib",
+			"destination": "/var/lib",
 			"options": [
 				"rbind",
 				"rw",
