@@ -3,7 +3,7 @@ Description=Etcd Server
 After=network.target
 
 [Service]
-ExecStart=/bin/runc --id $NAME
+ExecStart=/bin/runc start $NAME
 Restart=on-failure
 WorkingDirectory=$DESTDIR
 
