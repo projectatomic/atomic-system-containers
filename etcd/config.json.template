@@ -24,7 +24,6 @@
 		"path": "rootfs",
 		"readonly": true
 	},
-	"hostname": "shell",
 	"mounts": [
 		{
 			"destination": "/proc",
@@ -138,9 +137,6 @@
 			},
 			{
 				"type": "ipc"
-			},
-			{
-				"type": "uts"
 			},
 			{
 				"type": "mount"
