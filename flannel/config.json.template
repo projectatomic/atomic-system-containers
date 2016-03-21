@@ -30,15 +30,14 @@
 			"type": "proc",
 			"source": "proc"
 		},
-		{
+	        {
+			"type": "bind",
+			"source": "/dev",
 			"destination": "/dev",
-			"type": "tmpfs",
-			"source": "tmpfs",
 			"options": [
-				"nosuid",
-				"strictatime",
-				"mode=755",
-				"size=65536k"
+				"rbind",
+				"rw",
+				"mode=755"
 			]
 		},
 		{
