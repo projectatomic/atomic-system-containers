@@ -5,7 +5,6 @@ MAINTAINER Giuseppe Scrivano <gscrivan@redhat.com>
 RUN dnf -y install etcd hostname && \
     dnf clean all
 
-ADD etcd_container_template.service /etc/systemd/system/etcd_container_template.service
 ADD etcd-env.sh /usr/bin/etcd-env.sh
 ADD install.sh  /usr/bin/install.sh
 ADD uninstall.sh /usr/bin/uninstall.sh
