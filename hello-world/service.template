@@ -2,9 +2,10 @@
 Description=Hello World System Container
 
 [Service]
-ExecStart=/bin/runc start $NAME
+ExecStart=/bin/runc start "$NAME"
 Restart=on-failure
 WorkingDirectory=$DESTDIR
+ExecStop=/bin/runc kill "$NAME" KILL
 
 [Install]
 WantedBy=multi-user.target
