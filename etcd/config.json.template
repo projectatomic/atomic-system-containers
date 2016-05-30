@@ -7,8 +7,8 @@
 	"process": {
 		"terminal": false,
 		"user": {
-			"uid": 0,
-			"gid": 0
+			"uid": 998,
+			"gid": 997
 		},
 		"args": [
 			"/usr/bin/etcd-env.sh",
