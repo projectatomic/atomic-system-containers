@@ -7,15 +7,16 @@
 	"process": {
 		"terminal": false,
 		"user": {
-			"uid": 998,
-			"gid": 997
+			"uid": 0,
+			"gid": 0
 		},
 		"args": [
 			"/usr/bin/etcd-env.sh",
 			"/usr/bin/etcd"
 		],
 		"env": [
-			"NAME=$NAME",
+                        "ETCD_DATA_DIR=/var/lib/etcd-container/${NAME}.etcd",
+                        "NAME=$NAME",
 			"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
 			"TERM=xterm"
 		],
