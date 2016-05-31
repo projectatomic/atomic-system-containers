@@ -1,7 +1,7 @@
 [Unit]
 Description=Flanneld Server
-Requires=etcd.service
-After=etcd.service
+Requires=etcd-system.service
+After=etcd-system.service
 
 [Service]
 ExecStart=/bin/runc start $NAME
