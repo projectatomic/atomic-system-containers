@@ -139,7 +139,17 @@
 				"relatime",
 				"ro"
 			]
-		}
+		},
+                {
+                        "destination": "/run/flannel",
+                        "type": "bind",
+                        "source": "/run/flannel",
+                        "options": [
+                                "rw",
+                                "rbind",
+                                "rprivate"
+                        ]
+                }
 	],
 	"hooks": {},
 	"linux": {
