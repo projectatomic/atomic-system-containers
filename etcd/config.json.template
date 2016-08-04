@@ -146,10 +146,6 @@
 		],
 		"devices": null,
 		"apparmorProfile": "",
-		"selinuxProcessLabel": "",
-		"seccomp": {
-			"defaultAction": "",
-			"architectures": null
-		}
+		"selinuxProcessLabel": ""
 	}
 }
