@@ -4,10 +4,10 @@ Requires=etcd-system.service
 After=etcd-system.service
 
 [Service]
-ExecStart=/bin/runc start $NAME
+ExecStart=$EXEC_START
+ExecStop=$EXEC_STOP
 Restart=on-failure
 WorkingDirectory=$DESTDIR
-ExecStop=/bin/runc kill "$NAME"
 
 [Install]
 WantedBy=multi-user.target
