@@ -9,7 +9,7 @@
 		"user": {},
 		"args": [
                         "/usr/bin/flanneld",
-                        "-etcd-endpoints=http://127.0.0.1:2379"
+                        "-etcd-endpoints=$ETCD_ENDPOINTS"
 		],
 		"env": [
 			"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",

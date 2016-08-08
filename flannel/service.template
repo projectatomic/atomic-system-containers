@@ -1,7 +1,6 @@
 [Unit]
 Description=Flanneld Server
-Requires=etcd-system.service
-After=etcd-system.service
+After=$AFTER
 
 [Service]
 ExecStart=$EXEC_START
@@ -11,4 +10,3 @@ WorkingDirectory=$DESTDIR
 
 [Install]
 WantedBy=multi-user.target
-
