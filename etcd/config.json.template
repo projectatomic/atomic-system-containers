@@ -15,7 +15,7 @@
 			"/usr/bin/etcd"
 		],
 		"env": [
-                        "ETCD_DATA_DIR=/var/lib/etcd-container/${NAME}.etcd",
+                        "ETCD_DATA_DIR=/var/lib/etcd",
                         "NAME=$NAME",
 			"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
 			"TERM=xterm"
@@ -102,8 +102,8 @@
 		},
 		{
 			"type": "bind",
-			"source": "/var/lib",
-			"destination": "/var/lib",
+			"source": "/var/lib/etcd/${NAME}.etcd",
+			"destination": "/var/lib/etcd",
 			"options": [
 				"rbind",
 				"rw",
@@ -111,7 +111,18 @@
 			]
 		}
 	],
-	"hooks": {},
+        "hooks": {
+                "prestart": [
+                        {
+                                "path": "/usr/bin/mkdir",
+                                "args": ["mkdir", "-p", "/var/lib/etcd/${NAME}.etcd"]
+                        },
+                        {
+                                "path": "/usr/bin/chown",
+                                "args": ["chown", "root:root", "-R", "/var/lib/etcd/${NAME}.etcd"]
+                        }
+                ]
+        },
 	"linux": {
 		"capabilities": [
 			"CAP_AUDIT_WRITE",
