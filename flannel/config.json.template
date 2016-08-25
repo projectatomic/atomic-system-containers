@@ -8,6 +8,7 @@
 		"terminal": false,
 		"user": {},
 		"args": [
+                        "/usr/bin/install.sh",
                         "/usr/bin/flanneld",
                         "-etcd-endpoints=$ETCD_ENDPOINTS",
                         "-subnet-dir=/run/$NAME/networks",
@@ -146,7 +147,7 @@
                 {
                         "destination": "/run",
                         "type": "bind",
-                        "source": "/${RUN}/${NAME}",
+                        "source": "/run",
                         "options": [
                                 "rw",
                                 "rbind",
@@ -154,14 +155,7 @@
                         ]
                 }
 	],
-        "hooks": {
-                "prestart": [
-                        {
-                                "path": "/usr/bin/mkdir",
-                                "args": ["mkdir", "-p", "/${RUN}/${NAME}"]
-                        }
-                ]
-        },
+	"hooks": {},
 	"linux": {
 		"resources": {
 			"devices": [
