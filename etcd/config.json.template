@@ -114,10 +114,6 @@
         "hooks": {
                 "prestart": [
                         {
-                                "path": "/usr/bin/mkdir",
-                                "args": ["mkdir", "-p", "/var/lib/etcd/${NAME}.etcd"]
-                        },
-                        {
                                 "path": "/usr/bin/chown",
                                 "args": ["chown", "root:root", "-R", "/var/lib/etcd/${NAME}.etcd"]
                         }
