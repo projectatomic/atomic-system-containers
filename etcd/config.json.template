@@ -102,8 +102,18 @@
 		},
 		{
 			"type": "bind",
-			"source": "/var/lib/etcd/${NAME}.etcd",
+			"source": "${STATE_DIRECTORY}/${NAME}.etcd",
 			"destination": "/var/lib/etcd",
+			"options": [
+				"rbind",
+				"rw",
+				"mode=755"
+			]
+		},
+		{
+			"type": "bind",
+			"source": "${RUN_DIRECTORY}/${NAME}",
+			"destination": "/var/run/etcd",
 			"options": [
 				"rbind",
 				"rw",
@@ -111,14 +121,6 @@
 			]
 		}
 	],
-        "hooks": {
-                "prestart": [
-                        {
-                                "path": "/usr/bin/chown",
-                                "args": ["chown", "root:root", "-R", "/var/lib/etcd/${NAME}.etcd"]
-                        }
-                ]
-        },
 	"linux": {
 		"capabilities": [
 			"CAP_AUDIT_WRITE",
