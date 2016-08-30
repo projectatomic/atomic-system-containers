@@ -8,11 +8,10 @@
 		"terminal": false,
 		"user": {},
 		"args": [
-                        "/usr/bin/install.sh",
                         "/usr/bin/flanneld",
                         "-etcd-endpoints=$ETCD_ENDPOINTS",
-                        "-subnet-dir=/run/$NAME/networks",
-                        "-subnet-file=/run/$NAME/subnet.env"
+                        "-subnet-dir=/run/flannel/networks",
+                        "-subnet-file=/run/flannel/subnet.env"
 		],
 		"env": [
 			"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
@@ -145,9 +144,9 @@
 			]
 		},
                 {
-                        "destination": "/run",
+                        "destination": "/run/flannel",
                         "type": "bind",
-                        "source": "/run",
+			"source": "${RUN_DIRECTORY}/${NAME}",
                         "options": [
                                 "rw",
                                 "rbind",
