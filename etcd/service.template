@@ -7,7 +7,7 @@ ExecStart=$EXEC_START
 ExecStop=$EXEC_STOP
 Restart=on-failure
 WorkingDirectory=$DESTDIR
-RuntimeDirectory=${RUN_DIRECTORY}/${NAME}
+RuntimeDirectory=${NAME}
 
 [Install]
 WantedBy=multi-user.target
