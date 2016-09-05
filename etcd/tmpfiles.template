@@ -1,1 +1,3 @@
-dH    ${STATE_DIRECTORY}/etcd/${NAME}   0700 ${HOST_UID} ${HOST_GID} - -
+d    ${STATE_DIRECTORY}/etcd/${NAME}   0700 ${HOST_UID} ${HOST_GID} - -
+Z    ${STATE_DIRECTORY}/etcd/${NAME}   0700 ${HOST_UID} ${HOST_GID} - -
+
