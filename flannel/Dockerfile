@@ -2,8 +2,15 @@ FROM fedora
 
 MAINTAINER Giuseppe Scrivano <gscrivan@redhat.com>
 
-RUN dnf install -y flannel && dnf clean all
+ENV container=docker
+ENV FLANNELD_ETCD_ENDPOINTS="http://127.0.0.1:2379"
+ENV FLANNELD_ETCD_PREFIX="/atomic.io/network"
 
-COPY config.json.template manifest.json service.template /exports/
+RUN dnf -y install flannel && dnf clean all
 
-CMD ["/usr/bin/flanneld", "-etcd-endpoints=http://127.0.0.1:2379", "-subnet-dir=/run/$NAME/networks", "-subnet-file=/run/$NAME/subnet.env"]
+ADD flanneld-run.sh /usr/bin/
+
+# System container files
+ADD tmpfiles.template service.template manifest.json config.json.template /exports/
+
+CMD ["/usr/bin/flanneld-run.sh"]

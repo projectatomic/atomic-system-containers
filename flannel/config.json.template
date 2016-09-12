@@ -8,13 +8,12 @@
 		"terminal": false,
 		"user": {},
 		"args": [
-                        "/usr/bin/flanneld",
-                        "-etcd-endpoints=$ETCD_ENDPOINTS",
-                        "-subnet-dir=/run/flannel/networks",
-                        "-subnet-file=/run/flannel/subnet.env"
+			"/usr/bin/flanneld-run.sh"
 		],
 		"env": [
 			"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                        "FLANNELD_ETCD_PREFIX=$FLANNELD_ETCD_PREFIX",
+                        "FLANNELD_ETCD_ENDPOINTS=$FLANNELD_ETCD_ENDPOINTS",
 			"TERM=xterm",
 			"NAME=$NAME"
 		],
@@ -68,7 +67,7 @@
 		"path": "rootfs",
 		"readonly": true
 	},
-	"hostname": "runc",
+	"hostname": "flannel",
 	"mounts": [
 		{
 			"destination": "/proc",
@@ -144,9 +143,19 @@
 			]
 		},
                 {
+                        "type": "bind",
+                        "source": "/etc/systemd/system/docker.service.d/$NAME.conf",
+                        "destination": "/etc/systemd/system/docker.service.d/flannel.conf",
+                        "options": [
+                                "rbind",
+                                "rw",
+                                "mode=755"
+                        ]
+                },
+                {
+			"source": "${RUN_DIRECTORY}/${NAME}",
                         "destination": "/run/flannel",
                         "type": "bind",
-			"source": "${RUN_DIRECTORY}/${NAME}",
                         "options": [
                                 "rw",
                                 "rbind",
