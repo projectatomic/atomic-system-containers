@@ -16,6 +16,12 @@
 		],
 		"env": [
                         "NAME=$NAME",
+                        "ETCD_NAME=$ETCD_NAME",
+                        "ETCD_ADVERTISE_CLIENT_URLS=$ETCD_ADVERTISE_CLIENT_URLS",
+                        "ETCD_LISTEN_CLIENT_URLS=$ETCD_LISTEN_CLIENT_URLS",
+                        "ETCD_INITIAL_ADVERTISE_PEER_URLS=$ETCD_INITIAL_ADVERTISE_PEER_URLS",
+                        "ETCD_LISTEN_PEER_URLS=$ETCD_LISTEN_PEER_URLS",
+                        "ETCD_INITIAL_CLUSTER=$ETCD_INITIAL_CLUSTER",
 			"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
 			"TERM=xterm"
 		],
