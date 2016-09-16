@@ -11,6 +11,7 @@ RUN dnf -y install flannel && dnf clean all
 ADD flanneld-run.sh /usr/bin/
 
 # System container files
-ADD tmpfiles.template service.template manifest.json config.json.template /exports/
+COPY tmpfiles.template service.template manifest.json \
+     config.json.template /exports/
 
 CMD ["/usr/bin/flanneld-run.sh"]
