@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Create flannel.conf for docker service
-echo "[Service]" > /etc/systemd/system/docker.service.d/flannel.conf
-echo "EnvironmentFile=-/run/$NAME/docker" >> /etc/systemd/system/docker.service.d/flannel.conf
+echo "[Service]" > /etc/systemd/system/docker.service.d/$NAME.conf
+echo "EnvironmentFile=-/run/$NAME/docker" >> /etc/systemd/system/docker.service.d/$NAME.conf
 
 # Ensure this file doesn't already exist.
 rm -f run/flannel/subnet.env

@@ -144,8 +144,8 @@
 		},
                 {
                         "type": "bind",
-                        "source": "/etc/systemd/system/docker.service.d/$NAME.conf",
-                        "destination": "/etc/systemd/system/docker.service.d/flannel.conf",
+                        "source": "/etc/systemd/system/docker.service.d",
+                        "destination": "/etc/systemd/system/docker.service.d",
                         "options": [
                                 "rbind",
                                 "rw",
