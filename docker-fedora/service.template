@@ -1,0 +1,19 @@
+[Unit]
+Description=Docker service
+After=network.target
+
+[Service]
+ExecStart=$EXEC_START
+ExecStop=$EXEC_STOP
+Restart=on-failure
+WorkingDirectory=$DESTDIR
+RuntimeDirectory=docker
+LimitNOFILE=1048576
+LimitNPROC=1048576
+LimitCORE=infinity
+TimeoutStartSec=0
+MountFlags=slave
+SELinuxContext=unconfined_u:unconfined_r:unconfined_t:s0
+
+[Install]
+WantedBy=multi-user.target
