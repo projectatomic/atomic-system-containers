@@ -131,6 +131,17 @@
 	    ]
 	},
 	{
+		"destination": "/tmp",
+		"type": "tmpfs",
+		"source": "tmpfs",
+		"options": [
+			"nosuid",
+			"strictatime",
+			"mode=755",
+			"size=65536k"
+		]
+	},
+	{
 	    "type": "bind",
 	    "source": "/usr/share/rhel",
 	    "destination": "/usr/share/rhel",
