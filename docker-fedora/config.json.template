@@ -91,21 +91,23 @@
 	    "source": "proc"
 	},
 	{
-	    "type": "rbind",
+	    "type": "bind",
 	    "source": "/var/run",
 	    "destination": "/var/run",
 	    "options": [
 		"rbind",
+		"shared",
 		"rw",
 		"mode=755"
 	    ]
 	},
 	{
-	    "type": "rbind",
+	    "type": "bind",
 	    "source": "${STATE_DIRECTORY}/docker",
 	    "destination": "${STATE_DIRECTORY}/docker",
 	    "options": [
 		"rbind",
+		"shared",
 		"rw",
 		"mode=755"
 	    ]
@@ -131,15 +133,48 @@
 	    ]
 	},
 	{
-		"destination": "/tmp",
-		"type": "tmpfs",
-		"source": "tmpfs",
-		"options": [
-			"nosuid",
-			"strictatime",
-			"mode=755",
-			"size=65536k"
-		]
+	    "type": "bind",
+	    "source": "/root",
+	    "destination": "/root",
+	    "options": [
+		"rbind",
+		"rw",
+                "shared",
+		"mode=755"
+	    ]
+	},
+	{
+	    "type": "bind",
+	    "source": "/home",
+	    "destination": "/home",
+	    "options": [
+		"rbind",
+		"rw",
+                "shared",
+		"mode=755"
+	    ]
+	},
+	{
+	    "type": "bind",
+	    "source": "/mnt",
+	    "destination": "/mnt",
+	    "options": [
+		"rbind",
+		"rw",
+                "shared",
+		"mode=755"
+            ]
+	},
+	{
+	    "destination": "/tmp",
+	    "type": "tmpfs",
+	    "source": "tmpfs",
+	    "options": [
+		"nosuid",
+		"strictatime",
+		"mode=755",
+		"size=65536k"
+	    ]
 	},
 	{
 	    "type": "bind",
