@@ -1,0 +1,15 @@
+container:
+    image: fedora:24
+
+packages:
+    - python
+    - findutils
+    - git
+
+tests:
+    - ./test.sh
+
+branches:
+  - master
+  - auto
+  - try
