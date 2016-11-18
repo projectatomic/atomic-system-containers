@@ -102,8 +102,8 @@
 	},
 	{
 	    "type": "rbind",
-	    "source": "/var/lib/docker",
-	    "destination": "/var/lib/docker",
+	    "source": "${STATE_DIRECTORY}/docker",
+	    "destination": "${STATE_DIRECTORY}/docker",
 	    "options": [
 		"rbind",
 		"rw",
