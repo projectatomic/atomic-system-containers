@@ -47,6 +47,7 @@
             "CAP_SYS_TTY_CONFIG",
             "CAP_MKNOD",
             "CAP_LEASE",
+            "CAP_AUDIT_READ",
             "CAP_AUDIT_WRITE",
             "CAP_AUDIT_CONTROL",
             "CAP_SETFCAP",
@@ -65,16 +66,45 @@
 	"readonly": true
     },
     "mounts": [
-	{
-	    "source": "/dev",
-	    "destination": "/dev",
-	    "type": "rbind",
-	    "options": [
-		"rbind",
-		"rw",
-		"mode=755"
-	    ]
-	},
+        {
+            "source": "/dev",
+            "destination": "/dev",
+            "type": "devtmpfs"
+        },
+        {
+            "destination": "/dev/pts",
+            "type": "devpts",
+            "source": "devpts",
+            "options": [
+                "nosuid",
+                "noexec",
+                "newinstance",
+                "ptmxmode=0666",
+                "mode=0620"
+            ]
+        },
+        {
+            "destination": "/dev/shm",
+            "type": "tmpfs",
+            "source": "shm",
+            "options": [
+                "nosuid",
+                "noexec",
+                "nodev",
+                "mode=1777",
+                "size=65536k"
+            ]
+        },
+        {
+            "destination": "/dev/mqueue",
+            "type": "mqueue",
+            "source": "mqueue",
+            "options": [
+                "nosuid",
+                "noexec",
+                "nodev"
+            ]
+        },
 	{
 	    "source": "/sys",
 	    "destination": "/sys",
