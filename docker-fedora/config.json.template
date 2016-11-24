@@ -219,6 +219,7 @@
     ],
     "hooks": {},
     "linux": {
+	"rootfsPropagation": "",
 	"resources": {
 	    "devices": [
 		{

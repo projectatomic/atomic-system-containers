@@ -14,7 +14,7 @@ export GOTRACEBACK=crash
 
 /usr/libexec/docker/docker-containerd-current \
     --listen unix:///run/containerd.sock      \
-    --shim /usr/libexec/docker/docker-containerd-shim-current &
+    --shim /usr/bin/shim.sh &
 
 exec /usr/bin/dockerd-current \
      --add-runtime oci=/usr/libexec/docker/docker-runc-current \

@@ -14,6 +14,7 @@ LimitCORE=infinity
 TimeoutStartSec=0
 MountFlags=shared
 SELinuxContext=unconfined_u:unconfined_r:unconfined_t:s0
+Delegate=yes
 
 [Install]
 WantedBy=multi-user.target
