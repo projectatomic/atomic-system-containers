@@ -11,7 +11,7 @@
 	    "gid": 0
 	},
 	"args": [
-	    "/usr/bin/init.sh"
+	    "/usr/bin/init-wrapper.sh"
 	],
 	"env": [
 	    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
@@ -66,80 +66,77 @@
 	"readonly": true
     },
     "mounts": [
-        {
-            "source": "/dev",
-            "destination": "/dev",
-            "type": "devtmpfs"
-        },
-        {
-            "destination": "/dev/pts",
-            "type": "devpts",
-            "source": "devpts",
-            "options": [
-                "nosuid",
-                "noexec",
-                "newinstance",
-                "ptmxmode=0666",
-                "mode=0620"
-            ]
-        },
-        {
-            "destination": "/dev/shm",
-            "type": "tmpfs",
-            "source": "shm",
-            "options": [
-                "nosuid",
-                "noexec",
-                "nodev",
-                "mode=1777",
-                "size=65536k"
-            ]
-        },
-        {
-            "destination": "/dev/mqueue",
-            "type": "mqueue",
-            "source": "mqueue",
-            "options": [
-                "nosuid",
-                "noexec",
-                "nodev"
-            ]
-        },
+	{
+	    "source": "/dev",
+	    "destination": "/dev",
+	    "type": "rbind",
+	    "options": [
+		"rprivate",
+		"rbind",
+		"rw",
+		"mode=755"
+	    ]
+	},
 	{
 	    "source": "/sys",
 	    "destination": "/sys",
 	    "type": "rbind",
 	    "options": [
+		"rprivate",
 		"rbind",
 		"rw",
 		"mode=755"
 	    ]
 	},
 	{
+	    "source": "/proc",
 	    "destination": "/proc",
-	    "type": "proc",
-	    "source": "proc"
-	},
-	{
-	    "type": "bind",
-	    "source": "/var/run",
-	    "destination": "/var/run",
+	    "type": "rbind",
 	    "options": [
+		"rprivate",
 		"rbind",
-		"shared",
 		"rw",
 		"mode=755"
 	    ]
 	},
 	{
 	    "type": "bind",
-	    "source": "${STATE_DIRECTORY}/docker",
-	    "destination": "${STATE_DIRECTORY}/docker",
+	    "source": "/run",
+	    "destination": "/run",
 	    "options": [
+		"rprivate",
 		"rbind",
-		"shared",
 		"rw",
 		"mode=755"
+	    ]
+	},
+	{
+	    "source": "/tmp",
+	    "destination": "/tmp",
+	    "type": "rbind",
+	    "options": [
+		"rprivate",
+		"rbind",
+		"rw",
+		"mode=755"
+	    ]
+	},
+	{
+	    "type": "bind",
+	    "source": "/var/lib/docker",
+	    "destination": "/var/lib/docker",
+	    "options": [
+		"rbind",
+		"rslave"
+	    ]
+	},
+	{
+	    "type": "bind",
+	    "source": "/",
+	    "destination": "/host",
+	    "options": [
+		"rbind",
+		"rshared"
 	    ]
 	},
 	{
@@ -148,6 +145,7 @@
 	    "destination": "/etc",
 	    "options": [
 		"rbind",
+		"rprivate",
 		"rw",
 		"mode=755"
 	    ]
@@ -158,6 +156,7 @@
 	    "destination": "/lib/modules",
 	    "options": [
 		"rbind",
+		"rprivate",
 		"rw",
 		"mode=755"
 	    ]
@@ -168,8 +167,8 @@
 	    "destination": "/root",
 	    "options": [
 		"rbind",
+		"rprivate",
 		"rw",
-                "shared",
 		"mode=755"
 	    ]
 	},
@@ -179,8 +178,8 @@
 	    "destination": "/home",
 	    "options": [
 		"rbind",
+		"rprivate",
 		"rw",
-                "shared",
 		"mode=755"
 	    ]
 	},
@@ -191,26 +190,16 @@
 	    "options": [
 		"rbind",
 		"rw",
-                "shared",
+		"rprivate",
 		"mode=755"
             ]
-	},
-	{
-	    "destination": "/tmp",
-	    "type": "tmpfs",
-	    "source": "tmpfs",
-	    "options": [
-		"nosuid",
-		"strictatime",
-		"mode=755",
-		"size=65536k"
-	    ]
 	},
 	{
 	    "type": "bind",
 	    "source": "/usr/share/rhel",
 	    "destination": "/usr/share/rhel",
 	    "options": [
+		"rprivate",
 		"rbind",
 		"ro",
 		"mode=755"
@@ -219,7 +208,7 @@
     ],
     "hooks": {},
     "linux": {
-	"rootfsPropagation": "",
+	"rootfsPropagation": "shared",
 	"resources": {
 	    "devices": [
 		{
