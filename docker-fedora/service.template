@@ -3,18 +3,18 @@ Description=Docker service
 After=network.target
 
 [Service]
-ExecStart=$EXEC_START
-ExecStop=$EXEC_STOP
+ExecStartPre=/bin/sh -c "(mountpoint -q /var/lib/docker || mount --bind /var/lib/docker /var/lib/docker) && mount --make-shared /var/lib/docker"
+ExecStart=/bin/runc --systemd-cgroup run $NAME
+ExecStop=/bin/runc kill $NAME
 Restart=on-failure
 WorkingDirectory=$DESTDIR
-RuntimeDirectory=docker
 LimitNOFILE=1048576
 LimitNPROC=1048576
 LimitCORE=infinity
 TimeoutStartSec=0
-MountFlags=shared
 SELinuxContext=unconfined_u:unconfined_r:unconfined_t:s0
 Delegate=yes
+KillMode=none
 
 [Install]
 WantedBy=multi-user.target
