@@ -71,50 +71,18 @@
 	    "type": "rbind",
 	    "options": [
 		"rbind",
+		"shared",
 		"rw",
 		"mode=755"
 	    ]
 	},
-	{
-	    "destination": "/dev/pts",
-	    "type": "devpts",
-	    "source": "devpts",
-	    "options": [
-		"nosuid",
-		"noexec",
-		"newinstance",
-		"ptmxmode=0666",
-		"mode=0620"
-	    ]
-	},
-	{
-	    "destination": "/dev/shm",
-	    "type": "tmpfs",
-	    "source": "shm",
-	    "options": [
-		"nosuid",
-		"noexec",
-		"nodev",
-		"mode=1777",
-		"size=65536k"
-	    ]
-	},
-	{
-	    "destination": "/dev/mqueue",
-	    "type": "mqueue",
-	    "source": "mqueue",
-	    "options": [
-		"nosuid",
-		"noexec",
-		"nodev"
-	    ]
-        },
 	{
 	    "source": "/sys",
 	    "destination": "/sys",
 	    "type": "rbind",
 	    "options": [
 		"rbind",
+		"shared",
 		"rw",
 		"mode=755"
 	    ]
@@ -126,19 +94,19 @@
 	},
 	{
 	    "type": "rbind",
-	    "source": "/var",
-	    "destination": "/var",
+	    "source": "/var/run",
+	    "destination": "/var/run",
 	    "options": [
 		"rbind",
-		"shared",
+		"rshared",
 		"rw",
 		"mode=755"
 	    ]
 	},
 	{
 	    "type": "rbind",
-	    "source": "${STATE_DIRECTORY}/docker",
-	    "destination": "${STATE_DIRECTORY}/docker",
+	    "source": "/var/lib",
+	    "destination": "/var/lib",
 	    "options": [
 		"rbind",
 		"shared",
@@ -153,6 +121,7 @@
 	    "options": [
 		"rbind",
 		"rw",
+		"shared",
 		"mode=755"
 	    ]
 	},
@@ -163,41 +132,20 @@
 	    "options": [
 		"rbind",
 		"rw",
+		"shared",
 		"mode=755"
 	    ]
 	},
 	{
-	    "type": "bind",
-	    "source": "/root",
-	    "destination": "/root",
-	    "options": [
-		"rbind",
-		"rw",
-                "shared",
-		"mode=755"
-	    ]
-	},
-	{
-	    "type": "bind",
-	    "source": "/home",
-	    "destination": "/home",
-	    "options": [
-		"rbind",
-		"rw",
-                "shared",
-		"mode=755"
-	    ]
-	},
-	{
-	    "type": "bind",
-	    "source": "/mnt",
-	    "destination": "/mnt",
-	    "options": [
-		"rbind",
-		"rw",
-                "shared",
-		"mode=755"
-	    ]
+		"destination": "/tmp",
+		"type": "tmpfs",
+		"source": "tmpfs",
+		"options": [
+			"nosuid",
+			"strictatime",
+			"mode=755",
+			"size=65536k"
+		]
 	},
 	{
 	    "type": "bind",
@@ -212,6 +160,7 @@
     ],
     "hooks": {},
     "linux": {
+	"rootfsPropagation" : "slave",
 	"resources": {
 	    "devices": [
 		{
