@@ -13,7 +13,6 @@ LimitNPROC=1048576
 LimitCORE=infinity
 TimeoutStartSec=0
 MountFlags=shared
-SELinuxContext=system_u:system_r:docker_t:s0
 
 [Install]
 WantedBy=multi-user.target
