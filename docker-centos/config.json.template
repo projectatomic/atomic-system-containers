@@ -160,7 +160,7 @@
     ],
     "hooks": {},
     "linux": {
-	"rootfsPropagation" : "slave",
+	"rootfsPropagation" : "rslave",
 	"resources": {
 	    "devices": [
 		{
