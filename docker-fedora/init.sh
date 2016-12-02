@@ -10,6 +10,11 @@ for i in /etc/sysconfig/{docker,docker-storage,docker-network}; do
     test -e $i && . $i
 done
 
+while read i; do
+        echo EVAL $i
+        test -e $i && source $i
+done < <(sed -n -e "s/EnvironmentFile=-*// p" /etc/systemd/system/docker.service.d/*)
+
 export GOTRACEBACK=crash
 
 /usr/libexec/docker/docker-containerd-current \
