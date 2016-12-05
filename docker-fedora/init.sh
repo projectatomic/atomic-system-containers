@@ -8,8 +8,6 @@
 
 . /run/docker-env
 
-export GOTRACEBACK=crash
-
 /usr/libexec/docker/docker-containerd-current \
     --listen unix:///run/containerd.sock      \
     --shim /usr/bin/shim.sh &
