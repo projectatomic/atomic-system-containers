@@ -3,6 +3,7 @@ Description=Docker service
 After=network.target
 
 [Service]
+ExecStartPre=/bin/sh -c '/usr/bin/env | sed -n -e "/^[^_].*$/{s|^\([^=]*\)=\(.*\)$|\1=\\\"\2\\\"|p}" > /run/docker-env'
 ExecStart=$EXEC_START
 ExecStop=$EXEC_STOP
 Restart=on-failure
