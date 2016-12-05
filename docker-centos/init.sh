@@ -8,8 +8,6 @@
 
 . /run/docker-env
 
-export GOTRACEBACK=crash
-
 exec /usr/bin/docker-current daemon \
           $OPTIONS \
           $DOCKER_STORAGE_OPTIONS \
