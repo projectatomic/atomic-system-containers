@@ -6,14 +6,7 @@
     /usr/bin/docker-storage-setup
 )
 
-for i in /etc/sysconfig/{docker,docker-storage,docker-network}; do
-    test -e $i && . $i
-done
-
-while read i; do
-        echo EVAL $i
-        test -e $i && source $i
-done < <(sed -n -e "s/EnvironmentFile=-*// p" /etc/systemd/system/docker.service.d/*)
+. /run/docker-env
 
 export GOTRACEBACK=crash
 

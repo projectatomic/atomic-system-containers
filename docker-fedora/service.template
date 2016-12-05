@@ -4,6 +4,7 @@ After=network.target
 
 [Service]
 ExecStartPre=/bin/sh -c "(mountpoint -q /var/lib/docker || mount --bind /var/lib/docker /var/lib/docker) && mount --make-shared /var/lib/docker"
+ExecStartPre=/bin/sh -c '/usr/bin/env | sed -n -e "/^[^_].*$/{s|^\([^=]*\)=\(.*\)$|\1=\\\"\2\\\"|p}" > /run/docker-env'
 ExecStart=/bin/runc --systemd-cgroup run $NAME
 ExecStop=/bin/runc kill $NAME
 Restart=on-failure
