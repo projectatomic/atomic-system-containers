@@ -161,7 +161,16 @@
                                 "rbind",
                                 "rprivate"
                         ]
-                }
+                },
+                {
+                        "destination": "/etc/resolv.conf",
+                        "type": "bind",
+                        "source": "/etc/resolv.conf",
+                        "options": [
+                                "rbind",
+                                "rprivate"
+                        ]
+        }
 	],
 	"hooks": {},
 	"linux": {
