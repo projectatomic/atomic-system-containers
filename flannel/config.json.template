@@ -167,6 +167,7 @@
                         "type": "bind",
                         "source": "/etc/resolv.conf",
                         "options": [
+                                "ro",
                                 "rbind",
                                 "rprivate"
                         ]
