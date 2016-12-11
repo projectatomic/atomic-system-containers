@@ -6,7 +6,7 @@
     /usr/bin/docker-storage-setup
 )
 
-. /run/docker-env
+source /run/docker-bash-env
 
 /usr/libexec/docker/docker-containerd-current \
     --listen unix:///run/containerd.sock      \
