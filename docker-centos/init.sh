@@ -6,7 +6,7 @@
     /usr/bin/docker-storage-setup
 )
 
-. /run/docker-env
+source /run/docker-bash-env
 
 exec /usr/bin/docker-current daemon \
           $OPTIONS \
