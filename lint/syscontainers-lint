@@ -103,6 +103,8 @@ def check_config_json(path):
     for b in config['mounts']:
         if not 'source' in b:
             continue
+        if b['type'] == "rbind":
+            log(basename, "Unknown mount type rbind.  Use bind", is_error=True)
         if template and b['source'].startswith("/var/lib"):
             log(basename, "found mount point /var/lib.  Use ${STATE_DIRECTORY} instead")
         if template and b['source'].startswith("/run"):
