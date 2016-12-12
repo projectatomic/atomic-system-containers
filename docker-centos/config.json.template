@@ -173,7 +173,6 @@
 	    {
 		"type": "mount"
 	    }
-	],
-	"selinuxProcessLabel": "system_u:system_r:docker_t:s0"
+	]
     }
 }
