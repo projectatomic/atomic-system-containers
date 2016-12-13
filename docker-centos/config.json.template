@@ -109,7 +109,7 @@
 	    "destination": "/var/lib",
 	    "options": [
 		"rbind",
-		"shared",
+		"rshared",
 		"rw",
 		"mode=755"
 	    ]
@@ -160,7 +160,7 @@
     ],
     "hooks": {},
     "linux": {
-	"rootfsPropagation" : "rslave",
+	"rootfsPropagation" : "shared",
 	"resources": {
 	    "devices": [
 		{
