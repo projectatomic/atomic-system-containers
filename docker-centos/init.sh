@@ -12,4 +12,5 @@ exec /usr/bin/docker-current daemon \
           $OPTIONS \
           $DOCKER_STORAGE_OPTIONS \
           $DOCKER_NETWORK_OPTIONS \
-          $INSECURE_REGISTRY
+          $INSECURE_REGISTRY $ADD_REGISTRY \
+          $BLOCK_REGISTRY
