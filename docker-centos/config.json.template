@@ -70,7 +70,7 @@
 	    "destination": "/dev",
 	    "type": "bind",
 	    "options": [
-		"bind",
+		"rbind",
 		"shared",
 		"rw",
 		"mode=755"
