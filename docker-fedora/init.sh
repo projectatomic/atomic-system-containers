@@ -6,6 +6,8 @@
     /usr/bin/docker-storage-setup
 )
 
+getent group docker || groupadd docker
+
 source /run/docker-bash-env
 
 /usr/libexec/docker/docker-containerd-current \
