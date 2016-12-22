@@ -1,29 +1,22 @@
-#!/bin/sh
+#!/usr/bin/bash
 
-function cleanup {
-   while test $(findmnt --list -R -o TARGET /host/var/lib/docker/devicemapper | wc -l) -gt 1; do
-        umount -R /host/var/lib/docker || break
-    done
-    mount --rbind /var/lib/docker /host/var/lib/docker
-}
+mkdir -p /run/docker
 
-trap cleanup EXIT
+PID=`cat /run/docker/docker-wrapper.pid 2>/dev/null`
+if ! `kill -0 $PID 2>/dev/null`; then
+    truncate --size 0 /run/docker/docker-wrapper.pid
+    unshare -m setup-keep-alive-process.sh &
+fi
 
-/usr/bin/init.sh &
-PID=$!
+while test `wc -l < /run/docker/docker-wrapper.pid` -lt 1; do
+    sleep 0.1
+done
 
-# workaround an issue with deleting containers with mounts in other namespaces
-ls -1 /var/lib/docker/containers | \
-    while read i; do
-        if test -e /var/lib/docker/containers/$i/shm && test \! -e /var/lib/docker/containers/$i/config.v2.json; then
-            rm -rf /var/lib/docker/containers/$i >/dev/null 2>&1
-        fi
-    done
+PID=`cat /run/docker/docker-wrapper.pid 2>/dev/null`
 
-function interrupt {
-    kill $PID
-}
+if test \! -e /proc/$PID/root/usr/bin; then
+    mount-in-ns $PID /host/$DESTDIR/rootfs/usr /usr
+    mount-in-ns $PID /usr/lib/modules /usr/lib/modules
+fi
 
-trap interrupt INT
-
-wait $!
+exec nsenter -F -m -t $PID /usr/bin/init.sh

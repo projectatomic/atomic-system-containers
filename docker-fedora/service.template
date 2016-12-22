@@ -7,7 +7,6 @@ EnvironmentFile=-/etc/sysconfig/docker
 EnvironmentFile=-/etc/sysconfig/docker-storage
 EnvironmentFile=-/etc/sysconfig/docker-network
 Environment=GOTRACEBACK=crash
-ExecStartPre=/bin/sh -c "(mountpoint -q /var/lib/docker || mount --bind /var/lib/docker /var/lib/docker) && mount --make-shared /var/lib/docker"
 ExecStartPre=/bin/bash -c 'export -p > /run/docker-bash-env'
 ExecStart=/bin/runc --systemd-cgroup run $NAME
 ExecStop=/bin/runc kill $NAME
