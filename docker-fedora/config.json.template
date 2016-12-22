@@ -89,15 +89,9 @@
 	    ]
 	},
 	{
-	    "source": "/proc",
 	    "destination": "/proc",
-	    "type": "bind",
-	    "options": [
-		"rprivate",
-		"rbind",
-		"rw",
-		"mode=755"
-	    ]
+	    "type": "proc",
+	    "source": "proc"
 	},
 	{
 	    "type": "bind",
