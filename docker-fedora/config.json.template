@@ -14,6 +14,7 @@
 	    "/usr/bin/init-wrapper.sh"
 	],
 	"env": [
+	    "DESTDIR=$DESTDIR",
 	    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
 	    "TERM=xterm",
             "NAME=$NAME"
@@ -91,14 +92,18 @@
 	{
 	    "destination": "/proc",
 	    "type": "proc",
-	    "source": "proc"
+	    "source": "proc",
+            "options": [
+                "rprivate",
+                "mode=755"
+            ]
 	},
 	{
 	    "type": "bind",
 	    "source": "/run",
 	    "destination": "/run",
 	    "options": [
-		"rprivate",
+		"shared",
 		"rbind",
 		"rw",
 		"mode=755"
@@ -109,7 +114,7 @@
 	    "destination": "/tmp",
 	    "type": "bind",
 	    "options": [
-		"rprivate",
+		"shared",
 		"rbind",
 		"rw",
 		"mode=755"
@@ -126,31 +131,22 @@
 	},
 	{
 	    "type": "bind",
-	    "source": "/",
-	    "destination": "/host",
-	    "options": [
-		"rbind",
-		"rshared"
-	    ]
-	},
-	{
-	    "type": "bind",
 	    "source": "/etc",
 	    "destination": "/etc",
 	    "options": [
 		"rbind",
-		"rprivate",
+		"shared",
 		"rw",
 		"mode=755"
 	    ]
 	},
 	{
 	    "type": "bind",
-	    "source": "/lib/modules",
-	    "destination": "/lib/modules",
+	    "source": "/",
+	    "destination": "/host",
 	    "options": [
 		"rbind",
-		"rprivate",
+		"shared",
 		"rw",
 		"mode=755"
 	    ]
@@ -161,7 +157,7 @@
 	    "destination": "/root",
 	    "options": [
 		"rbind",
-		"rprivate",
+		"shared",
 		"rw",
 		"mode=755"
 	    ]
@@ -172,7 +168,7 @@
 	    "destination": "/home",
 	    "options": [
 		"rbind",
-		"rprivate",
+		"shared",
 		"rw",
 		"mode=755"
 	    ]
@@ -184,7 +180,7 @@
 	    "options": [
 		"rbind",
 		"rw",
-		"rprivate",
+		"shared",
 		"mode=755"
             ]
 	},
@@ -193,7 +189,7 @@
 	    "source": "/usr/share/rhel",
 	    "destination": "/usr/share/rhel",
 	    "options": [
-		"rprivate",
+		"shared",
 		"rbind",
 		"ro",
 		"mode=755"
@@ -202,7 +198,7 @@
     ],
     "hooks": {},
     "linux": {
-	"rootfsPropagation": "shared",
+	"rootfsPropagation": "rslave",
 	"resources": {
 	    "devices": [
 		{
