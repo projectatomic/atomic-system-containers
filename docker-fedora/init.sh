@@ -1,14 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 
 # set storage first
 (
-    . /etc/sysconfig/docker-storage-setup
-    /usr/bin/docker-storage-setup
+        . /etc/sysconfig/docker-storage-setup
+        /usr/bin/docker-storage-setup
 )
 
 getent group docker || groupadd docker
-
-source /run/docker-bash-env
 
 /usr/libexec/docker/docker-containerd-current \
     --listen unix:///run/containerd.sock      \
