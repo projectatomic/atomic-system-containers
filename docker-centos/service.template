@@ -7,16 +7,23 @@ EnvironmentFile=-/etc/sysconfig/docker
 EnvironmentFile=-/etc/sysconfig/docker-storage
 EnvironmentFile=-/etc/sysconfig/docker-network
 Environment=GOTRACEBACK=crash
+Environment=PATH=/usr/libexec/docker:/usr/bin:/usr/sbin
 ExecStartPre=/bin/bash -c 'export -p > /run/docker-bash-env'
-ExecStart=$EXEC_START
-ExecStop=$EXEC_STOP
+ExecStartPre=/bin/sh $DESTDIR/rootfs/set_chroot.sh $DESTDIR/rootfs
+ExecStart=/usr/bin/init.sh
+ExecStopPost=/bin/sh $DESTDIR/rootfs/unset_chroot.sh
 Restart=on-failure
-WorkingDirectory=$DESTDIR
-RuntimeDirectory=docker
+RootDirectory=/var/lib/containers/docker-chroot
+RootDirectoryStartOnly=yes
+PermissionsStartOnly=yes
+WorkingDirectory=/
 LimitNOFILE=1048576
 LimitNPROC=1048576
 LimitCORE=infinity
 TimeoutStartSec=0
+KillMode=control-group
+Type=simple
+SELinuxContext=system_u:system_r:container_runtime_t:s0
 
 [Install]
 WantedBy=multi-user.target
