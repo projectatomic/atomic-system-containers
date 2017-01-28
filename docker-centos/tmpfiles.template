@@ -1,1 +1,2 @@
 d    /var/lib/docker - - - - -
+d   /var/lib/containers/docker-chroot  - - - - -
