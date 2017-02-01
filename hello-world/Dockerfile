@@ -6,5 +6,6 @@ COPY manifest.json service.template config.json.template /exports/
 
 LABEL Name="gscrivano/hello-world" \
       Version="1" \
+      atomic.type='system' \
       Architecture="x86_64" \
       Foo="bar"
