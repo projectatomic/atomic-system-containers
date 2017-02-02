@@ -211,7 +211,6 @@
 	    {
 		"type": "mount"
 	    }
-	],
-	"selinuxProcessLabel": "system_u:system_r:container_runtime_t:s0"
+	]
     }
 }
