@@ -2,6 +2,14 @@ FROM fedora
 
 MAINTAINER Giuseppe Scrivano <gscrivan@redhat.com>
 
+ENV VERSION=0.1 RELEASE=1 ARCH=x86_64
+LABEL BZComponent="etcd-docker" \
+      Name="$FGC/etcd" \
+      Version="$VERSION" \
+      Release="$RELEASE" \
+      Architecture="$ARCH" \
+      Summary="A key-value store for shared configuration and service discovery, intended to be run as a system container"
+
 RUN dnf -y install etcd hostname && \
     dnf clean all
 
