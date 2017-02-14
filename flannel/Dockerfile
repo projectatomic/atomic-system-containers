@@ -12,7 +12,8 @@ LABEL BZComponent="flannel-docker" \
       Version="$VERSION" \
       Release="$RELEASE" \
       Architecture="$ARCH" \
-      Summary="An etcd driven address agent, intended to be run as a system container"
+      Summary="An etcd driven address agent, intended to be run as a system container" \
+      atomic.type='system'
 
 RUN dnf -y install flannel && dnf clean all
 
