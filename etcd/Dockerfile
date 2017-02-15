@@ -1,4 +1,4 @@
-FROM fedora
+FROM fedora:25
 
 MAINTAINER Giuseppe Scrivano <gscrivan@redhat.com>
 
@@ -8,9 +8,9 @@ LABEL BZComponent="etcd-docker" \
       Version="$VERSION" \
       Release="$RELEASE" \
       Architecture="$ARCH" \
-      Summary="A key-value store for shared configuration and service discovery, intended to be run as a system container"
+      Summary="A key-value store for shared configuration and service discovery."
 
-RUN dnf -y install etcd hostname && \
+RUN dnf -y --setopt=tsflags=nodocs install etcd hostname && \
     dnf clean all
 
 COPY etcd-env.sh /usr/bin/etcd-env.sh
