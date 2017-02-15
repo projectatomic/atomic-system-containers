@@ -1,13 +1,16 @@
 # etcd-container
 
-Building etcd container for rhel, centos and atomic host:
+Building etcd container for fedora and atomic host:
 
 ```
-# git clone https://github.com/aveshagarwal/etcd-container
-# cd etcd-container
+# git clone https://github.com/projectatomic/atomic-system-containers
+# cd atomic-system-containers/etcd
 # docker build --rm -t etcd .
 ```
-**Instructions for RHEL and CentOS**
+
+## As a docker container:
+
+**Instructions for Fedora**
 
 Running etcd container
 
@@ -36,6 +39,38 @@ Stopping etcd container on atomic host:
 ```
 
 Uninstalling etcd container on atomic host:
+
+```
+#atomic uninstall etcd
+```
+
+## As a system container, with the atomic CLI:
+
+Pull from local docker into ostree:
+
+```
+#atomic pull --storage ostree docker:etcd
+```
+
+Install the container:
+
+```
+#atomic install --system etcd
+```
+
+Start as a systemd service:
+
+```
+#systemctl start etcd
+```
+
+Stopping the service
+
+```
+#systemctl stop etcd
+```
+
+Removing the container
 
 ```
 #atomic uninstall etcd

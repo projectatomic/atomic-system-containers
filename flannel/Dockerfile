@@ -1,10 +1,8 @@
-FROM fedora
+FROM fedora:25
 
 MAINTAINER Giuseppe Scrivano <gscrivan@redhat.com>
 
-ENV container=docker
-ENV FLANNELD_ETCD_ENDPOINTS="http://127.0.0.1:2379"
-ENV FLANNELD_ETCD_PREFIX="/atomic.io/network"
+ENV container=docker FLANNELD_ETCD_ENDPOINTS="http://127.0.0.1:2379" FLANNELD_ETCD_PREFIX="/atomic.io/network"
 
 ENV VERSION=0.1 RELEASE=1 ARCH=x86_64
 LABEL BZComponent="flannel-docker" \
@@ -15,7 +13,7 @@ LABEL BZComponent="flannel-docker" \
       Summary="An etcd driven address agent, intended to be run as a system container" \
       atomic.type='system'
 
-RUN dnf -y install flannel && dnf clean all
+RUN dnf -y --setopt=tsflags=nodocs install flannel && dnf clean all
 
 ADD flanneld-run.sh /usr/bin/
 
