@@ -1,14 +1,13 @@
 FROM fedora:25
 
-MAINTAINER Giuseppe Scrivano <gscrivan@redhat.com>
-
 ENV VERSION=0.1 RELEASE=1 ARCH=x86_64
 LABEL BZComponent="etcd-docker" \
       Name="$FGC/etcd" \
       Version="$VERSION" \
       Release="$RELEASE" \
       Architecture="$ARCH" \
-      Summary="A key-value store for shared configuration and service discovery."
+      Summary="A key-value store for shared configuration and service discovery." \
+      Maintainer="Giuseppe Scrivano <gscrivan@redhat.com>"
 
 RUN dnf -y --setopt=tsflags=nodocs install etcd hostname && \
     dnf clean all
