@@ -19,7 +19,7 @@ Prerequisite:
 
 2. a network is configured in etcd
 
-(example with etcd also installed as a system container: `runc exec etcd etcdctl set /atomic.io/network/config '{"Network":"172.17.0.0/16"}'`)
+(example with etcd installed as a system container: `runc exec etcd etcdctl set /atomic.io/network/config '{"Network":"172.17.0.0/16"}'`)
 
 Pull from local docker into ostree:
 
