@@ -9,7 +9,7 @@ LABEL BZComponent="flannel-docker" \
       Release="$RELEASE" \
       Architecture="$ARCH" \
       Summary="An etcd driven address agent, intended to be run as a system container" \
-      Maintainer="Giuseppe Scrivano <gscrivan@redhat.com>" \
+      maintainer="Giuseppe Scrivano <gscrivan@redhat.com>" \
       atomic.type='system'
 
 RUN dnf -y --setopt=tsflags=nodocs install flannel && dnf clean all
