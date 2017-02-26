@@ -1,0 +1,12 @@
+[handlers]
+keys=docker,console,syslog,logfile
+
+[logger_root]
+level=INFO
+handlers=docker
+propagate=0
+
+[handler_docker]
+class: StreamHandler
+args: []
+formatter: long
