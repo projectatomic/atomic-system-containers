@@ -9,7 +9,7 @@ LABEL summary="The oVirt Guest Agent" \
 
 ADD logger_conf /root/logger_conf
 
-RUN dnf -y install ovirt-guest-agent-common
+RUN yum -y install ovirt-guest-agent-common
 RUN cat /root/logger_conf >> /etc/ovirt-guest-agent.conf && rm /root/logger_conf
 
 COPY ovirt-guest-agent-install.sh /usr/bin/install.sh
