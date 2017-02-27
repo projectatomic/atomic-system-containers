@@ -7,7 +7,7 @@ echo "EnvironmentFile=-/run/$NAME/docker" >> /etc/systemd/system/docker.service.
 # Ensure this file doesn't already exist.
 rm -f run/flannel/subnet.env
 
-/usr/bin/flanneld &
+NOTIFY_SOCKET=/dev/null /usr/bin/flanneld &
 child=$!
 
 while test \! -e /run/flannel/subnet.env
@@ -16,5 +16,7 @@ do
 done
 
 /usr/libexec/flannel/mk-docker-opts.sh -k DOCKER_NETWORK_OPTIONS -d /run/flannel/docker
+
+systemd-notify --ready
 
 wait $child
