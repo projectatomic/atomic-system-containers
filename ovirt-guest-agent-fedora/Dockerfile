@@ -13,7 +13,7 @@ RUN dnf -y install ovirt-guest-agent-common
 RUN cat /root/logger_conf >> /etc/ovirt-guest-agent.conf && rm /root/logger_conf
 
 COPY ovirt-guest-agent-install.sh /usr/bin/install.sh
-COPY ovirt-guest-agent-uninstall.sh /usr/bin/uinstall.sh
+COPY ovirt-guest-agent-uninstall.sh /usr/bin/uninstall.sh
 COPY ovirt-container-shutdown.sh ovirt-container-hibernate.sh prep.sh /usr/local/bin/
 COPY run.sh /usr/bin/
 COPY service.template tmpfiles.template config.json.template /exports/

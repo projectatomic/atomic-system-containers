@@ -5,7 +5,8 @@
 
 # Fake being the host - To show the Atomic Host release
 /bin/rm -f /etc/redhat-release
-/bin/ln -sf /host/etc/redhat-release /etc/redhat-release
+# Replaced with bind mount
+#/bin/ln -sf /host/etc/redhat-release /etc/redhat-release
 
 echo '#!/usr/bin/python' > /usr/share/ovirt-guest-agent/LockActiveSession.py
 echo '#!/usr/bin/python' > /usr/share/ovirt-guest-agent/LogoutActiveUser.py

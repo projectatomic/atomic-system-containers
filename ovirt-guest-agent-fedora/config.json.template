@@ -177,7 +177,16 @@
 				"bind"
 			]
 		},
-                {
+		{
+			"source": "/etc/redhat-release",
+			"destination": "/etc-redhat-release",
+			"type": "bind",
+			"options": [
+				"ro",
+				"bind"
+			]
+		},
+		{
 			"source": "/var/log/ovirt-guest-agent",
 			"destination": "/var/log/ovirt-guest-agent",
 			"type": "bind",
