@@ -14,7 +14,6 @@ echo '#!/usr/bin/python' > /usr/share/ovirt-guest-agent/LogoutActiveUser.py
 /bin/rm -f /usr/share/ovirt-guest-agent/CredServer.py*
 
 /bin/ln -sf /usr/local/bin/ovirt-container-shutdown.sh /usr/share/ovirt-guest-agent/ovirt-shutdown
-/bin/ln -sf /usr/local/bin/ovirt-container-hibernate.sh /usr/share/ovirt-guest-agent/ovirt-hibernate
 
 /bin/ln -sf /usr/share/ovirt-guest-agent/LockActiveSession.py /usr/share/ovirt-guest-agent/ovirt-locksession
 /bin/ln -sf /usr/share/ovirt-guest-agent/LogoutActiveUser.py /usr/share/ovirt-guest-agent/ovirt-logout

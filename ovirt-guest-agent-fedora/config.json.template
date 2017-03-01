@@ -132,7 +132,7 @@
 				"nosuid",
 				"noexec",
 				"nodev",
-				"ro"
+				"rw"
 			]
 		},
 		{

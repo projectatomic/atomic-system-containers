@@ -12,7 +12,7 @@ ADD logger_conf /root/logger_conf
 RUN yum install epel-release -y; yum -y install ovirt-guest-agent-common
 RUN cat /root/logger_conf >> /etc/ovirt-guest-agent.conf && rm /root/logger_conf
 
-COPY ovirt-container-shutdown.sh ovirt-container-hibernate.sh prep.sh /usr/local/bin/
+COPY ovirt-container-shutdown.sh prep.sh /usr/local/bin/
 COPY run.sh /usr/bin/
 COPY service.template tmpfiles.template config.json.template /exports/
 
