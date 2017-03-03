@@ -1,9 +1,11 @@
-#!/bin/sh
+#!/bin/bash
+
+source /run/docker-bash-env
 
 # set storage first
 (
-        . /etc/sysconfig/docker-storage-setup
-        /usr/bin/docker-storage-setup
+    . /etc/sysconfig/docker-storage-setup
+    /usr/bin/docker-storage-setup
 )
 
 getent group docker || groupadd docker
