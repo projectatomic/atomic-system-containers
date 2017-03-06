@@ -62,6 +62,8 @@ def check_dockerfile(path, dockerfile):
         content = f.read()
     content = re.sub("#.*\n", "", content)
     content = content.replace("\\\n", "")
+    if re.search('(COPY|ADD) .* /export/?\n', content):
+        log('Dockerfile', "Found /export.  Did you mean /exports/?")
     for i in all_files:
         if os.path.exists(os.path.join(path, i)):
             if re.search('ADD .*%s.* /exports/' % i , content):
