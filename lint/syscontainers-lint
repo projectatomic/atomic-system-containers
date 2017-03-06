@@ -35,7 +35,8 @@ all_files = [
     "tmpfiles.template"
 ]
 
-found_any_issue = False
+found_any_warning = False
+found_any_error = False
 
 (COLOR_BLACK,
  COLOR_RED,
@@ -53,8 +54,11 @@ def colored(line, color):
         return line
 
 def log(location, msg, is_error=False):
-    global found_any_issue
-    found_any_issue = True
+    global found_any_warning, found_any_error
+    found_any_warning = True
+    if is_error:
+        found_any_error = True
+
     print(colored("%s: %s" %(location, msg), COLOR_RED if is_error else COLOR_YELLOW))
 
 def check_dockerfile(path, dockerfile):
@@ -197,7 +201,7 @@ def check_manifest_json(path):
         log(basename, "Missing default value for %s" % i)
 
 def check(path):
-    global found_any_issue
+    global found_any_warning
     if not os.path.exists(path):
         raise LintRuntimeError("The path %s does not exist" % path)
     dockerfilepath = os.path.join(path, "Dockerfile")
@@ -208,7 +212,7 @@ def check(path):
     check_config_json(path)
     check_systemd_unit(path)
     check_manifest_json(path)
-    if not found_any_issue:
+    if not found_any_warning:
         print(colored("All Good!", COLOR_GREEN))
 
 if __name__ == '__main__':
@@ -220,4 +224,7 @@ if __name__ == '__main__':
         check(sys.argv[1])
     except LintRuntimeError as e:
         print(e.error)
+        sys.exit(1)
+
+    if found_any_error:
         sys.exit(1)
