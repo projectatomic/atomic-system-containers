@@ -89,7 +89,19 @@ def check_git(path):
             if  "modified" in subprocess.check_output(["git", "-C", path, "status", i]):
                 log(i, "file has not staged changes")
 
+def get_go_os_arch():
+        res = subprocess.check_output(["go", "tool", "dist", "list", "-json"])
+        os_arch = {}
+        for i in json.loads(res):
+            os, arch = i['GOOS'], i['GOARCH']
+            tmp = os_arch.get(os, {})
+            tmp[arch] = True
+            os_arch[os] = tmp
+        return os_arch
+
 def check_config_json(path):
+    os_arch = get_go_os_arch()
+
     if os.path.exists(os.path.join(path, "config.json")):
         basename = "config.json"
         template = False
@@ -104,6 +116,12 @@ def check_config_json(path):
         content = f.read()
 
     config = json.loads(content)
+    spec_os, spec_arch = config['platform']['os'], config['platform']['arch']
+    if spec_os not in os_arch.keys():
+        log(basename, "Invalid os specified: `%s`" % spec_os, is_error=True)
+    if spec_arch not in os_arch[spec_os].keys():
+        log(basename, "Invalid arch specified for the OS: `%s`" % spec_arch, is_error=True)
+
     for b in config['mounts']:
         if not 'source' in b:
             continue
