@@ -114,6 +114,8 @@ def check_config_json(path):
             log(basename, "Path must be 'rootfs'")
     if not config['root']['readonly']:
             log(basename, "Readonly must be true", is_error=True)
+    if config['process']['terminal']:
+            log(basename, "process/terminal must be false", is_error=True)
 
 def check_systemd_unit(path):
     basename = "service.template"
