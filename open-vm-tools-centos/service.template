@@ -1,0 +1,12 @@
+[Unit]
+Description=Service for virtual machines hosted on VMware
+Documentation=http://github.com/vmware/open-vm-tools
+ConditionVirtualization=vmware
+
+[Service]
+ExecStart=$EXEC_START
+ExecStop=$EXEC_STOP
+WorkingDirectory=$DESTDIR
+
+[Install]
+WantedBy=multi-user.target
