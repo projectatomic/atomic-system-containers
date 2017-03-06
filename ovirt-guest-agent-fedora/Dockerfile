@@ -1,11 +1,11 @@
 FROM fedora:rawhide
-MAINTAINER Vinzenz Feenstra <evilissimo@redhat.com>
 
 LABEL summary="The oVirt Guest Agent" \
       io.k8s.description="The ovirt-guest-agent is providing information about the virtual machine and allows to restart / shutdown the machine via the oVirt Portal. This image is intended to be used with virtual machines running Fedora Atomic Host." \
       io.k8s.display-name="oVirt Guest Agent" \
       license="ASL 2.0" \
-      architecture="x86_64"
+      architecture="x86_64" \
+      maintainer="Vinzenz Feenstra <evilissimo@redhat.com>"
 
 ADD logger_conf /root/logger_conf
 
