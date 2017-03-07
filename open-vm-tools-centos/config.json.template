@@ -70,7 +70,7 @@
         "readonly": true
     },
     "mounts": [
-	 {
+	    {
             "destination": "/run/systemd",
             "type": "bind",
             "source": "/run/systemd",
@@ -135,7 +135,7 @@
             "type": "bind",
             "source": "/etc/shadow",
             "options": [
-                "rw",
+                "ro",
                 "rbind",
                 "rprivate"
             ]
@@ -186,7 +186,7 @@
             "type": "bind",
             "source": "/etc/passwd",
             "options": [
-                "rw",
+                "ro",
                 "rbind",
                 "rprivate"
             ]
