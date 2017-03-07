@@ -1,4 +1,6 @@
 # open-vm-tools-centos-container
+# This container is for use on a VMware virtual machine 
+# It manages the VM for use with VMware's management suite with vCenter and vSphere
 
 Building open-vm-tools-centos container for fedora and atomic host:
 
