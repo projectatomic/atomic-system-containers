@@ -11,13 +11,7 @@ LABEL summary="The open-vm-tools guest agent" \
 
 ENV SYSTEMD_IGNORE_CHROOT=1
 
-RUN yum -y --disablerepo=\* --enablerepo=rhel-7-server-rpms install yum-utils && \
-  yum-config-manager --disable \* && \
-  yum-config-manager --enable rhel-7-server-rpms && \
-  yum clean all
-
-
-RUN yum -y install file open-vm-tools perl open-vm-tools-deploypkg net-tools iproute systemd && \ 
+RUN yum -y install file open-vm-tools perl net-tools iproute systemd && \ 
 yum clean all 
 
 ADD service.template config.json.template /exports/
