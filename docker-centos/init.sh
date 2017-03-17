@@ -9,6 +9,7 @@
 source /run/docker-bash-env
 
 exec /usr/bin/docker-current daemon \
+          --exec-opt native.cgroupdriver=systemd \
           $OPTIONS \
           $DOCKER_STORAGE_OPTIONS \
           $DOCKER_NETWORK_OPTIONS \
