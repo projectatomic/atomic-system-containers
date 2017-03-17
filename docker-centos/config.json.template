@@ -66,50 +66,12 @@
     },
     "mounts": [
 	{
-	    "source": "/dev",
-	    "destination": "/dev",
+	    "source": "/tmp",
+	    "destination": "/tmp",
 	    "type": "bind",
 	    "options": [
-		"rbind",
-		"shared",
-		"rw",
-		"mode=755"
-	    ]
-	},
-	{
-	    "source": "/sys",
-	    "destination": "/sys",
-	    "type": "bind",
-	    "options": [
-		"rbind",
-		"shared",
-		"rw",
-		"mode=755"
-	    ]
-	},
-	{
-	    "destination": "/proc",
-	    "type": "proc",
-	    "source": "proc"
-	},
-	{
-	    "type": "bind",
-	    "source": "/var/run",
-	    "destination": "/var/run",
-	    "options": [
-		"rbind",
-		"rshared",
-		"rw",
-		"mode=755"
-	    ]
-	},
-	{
-	    "type": "bind",
-	    "source": "${STATE_DIRECTORY}",
-	    "destination": "/var/lib",
-	    "options": [
-		"rbind",
-		"shared",
+		"private",
+		"bind",
 		"rw",
 		"mode=755"
 	    ]
@@ -120,8 +82,8 @@
 	    "destination": "/etc",
 	    "options": [
 		"rbind",
+		"rprivate",
 		"rw",
-		"shared",
 		"mode=755"
 	    ]
 	},
@@ -131,36 +93,110 @@
 	    "destination": "/lib/modules",
 	    "options": [
 		"rbind",
+		"rprivate",
 		"rw",
-		"shared",
 		"mode=755"
 	    ]
 	},
 	{
-		"destination": "/tmp",
-		"type": "tmpfs",
-		"source": "tmpfs",
-		"options": [
-			"nosuid",
-			"strictatime",
-			"mode=755",
-			"size=65536k"
-		]
+	    "type": "bind",
+	    "source": "/root",
+	    "destination": "/root",
+	    "options": [
+		"rbind",
+		"rprivate",
+		"rw",
+		"mode=755"
+	    ]
+	},
+	{
+	    "type": "bind",
+	    "source": "/home",
+	    "destination": "/home",
+	    "options": [
+		"rbind",
+		"rprivate",
+		"rw",
+		"mode=755"
+	    ]
+	},
+	{
+	    "type": "bind",
+	    "source": "/mnt",
+	    "destination": "/mnt",
+	    "options": [
+		"rbind",
+		"rw",
+		"rprivate",
+		"mode=755"
+            ]
 	},
 	{
 	    "type": "bind",
 	    "source": "/usr/share/rhel",
 	    "destination": "/usr/share/rhel",
 	    "options": [
+		"rprivate",
 		"rbind",
 		"ro",
 		"mode=755"
+	    ]
+	},
+	{
+	    "type": "bind",
+	    "source": "${RUN_DIRECTORY}",
+	    "destination": "/run",
+	    "options": [
+		"rshared",
+		"rbind",
+		"rw",
+		"mode=755"
+	    ]
+	},
+	{
+	    "type": "bind",
+	    "source": "${STATE_DIRECTORY}/docker",
+	    "destination": "/var/lib/docker",
+	    "options": [
+		"rbind",
+		"rshared",
+		"rw"
+	    ]
+	},
+	{
+	    "source": "/dev",
+	    "destination": "/dev",
+	    "type": "bind",
+	    "options": [
+		"rprivate",
+		"rbind",
+		"rw",
+		"mode=755"
+	    ]
+	},
+	{
+	    "source": "/sys",
+	    "destination": "/sys",
+	    "type": "bind",
+	    "options": [
+		"rprivate",
+		"rbind",
+		"rw",
+		"mode=755"
+	    ]
+	},
+	{
+	    "source": "/proc",
+	    "destination": "/proc",
+	    "type": "proc",
+	    "options": [
+		"private"
 	    ]
 	}
     ],
     "hooks": {},
     "linux": {
-	"rootfsPropagation" : "rslave",
+	"rootfsPropagation": "rslave",
 	"resources": {
 	    "devices": [
 		{
@@ -174,6 +210,6 @@
 		"type": "mount"
 	    }
 	],
-	"selinuxProcessLabel": "system_u:system_r:docker_t:s0"
+	"selinuxProcessLabel": "system_u:system_r:container_runtime_t:s0"
     }
 }
