@@ -14,6 +14,16 @@ getent group docker || groupadd docker
     --listen unix:///run/containerd.sock      \
     --shim /usr/bin/shim.sh &
 
+# Run all the installed containers
+mkdir -p /run/docker/plugins/
+ls -1 /usr/libexec/docker/*plugin |  \
+while read i;
+do
+    plugin=$(basename $i)
+    test -e /run/docker/plugins/$plugin.sock || mkfifo /run/docker/plugins/$plugin.sock
+    $i &
+done
+
 exec /usr/bin/dockerd-current \
      --add-runtime oci=/usr/libexec/docker/docker-runc-current \
      --default-runtime=oci \
