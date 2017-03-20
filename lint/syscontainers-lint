@@ -70,6 +70,10 @@ def check_dockerfile(path, dockerfile):
         log('Dockerfile', "Found MAINTAINER $NAME.  Please use LABEL maintainer=$NAME")
     if re.search('(COPY|ADD) .* /export/?\n', content):
         log('Dockerfile', "Found /export.  Did you mean /exports/?")
+    if re.search('\nRUN.*(dnf|yum).*install', content):
+        if not re.search('tsflags=nodocs', content):
+            log('Dockerfile', "Found 'dnf/yum install' command without '--setopt=tsflags=nodocs'. " \
+                "Please add the flag to reduce image size unless there is need for documentation.")
     for i in all_files:
         if os.path.exists(os.path.join(path, i)):
             if re.search('ADD .*%s.* /exports/' % i , content):
