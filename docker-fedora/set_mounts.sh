@@ -1,4 +1,4 @@
 #!/bin/sh
 
-findmnt /var/lib/docker > /dev/null || mount --bind --make-shared /var/lib/docker /var/lib/docker
+findmnt /var/lib > /dev/null || mount --bind --make-shared /var/lib /var/lib
 mount --make-shared /run
