@@ -56,7 +56,8 @@
             "CAP_MAC_ADMIN",
             "CAP_SYSLOG",
             "CAP_WAKE_ALARM",
-            "CAP_BLOCK_SUSPEND"
+            "CAP_BLOCK_SUSPEND",
+            "CAP_AUDIT_READ"
 	],
 	"noNewPrivileges": false
     },
