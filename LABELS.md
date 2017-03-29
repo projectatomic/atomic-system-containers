@@ -51,14 +51,14 @@ build-date="2017-12-01T10:30:30Z"
 ```
 
 
-## bzcomponent
+## com.redhat.component
 
 Denotes the [Red Hat Bugzilla](https://bugzilla.redhat.com) component
 related to this image.
 
 ### Example
 ```
-bzcomponent="flannel"
+com.redhat.component="flannel"
 ```
 
 
