@@ -14,6 +14,11 @@ getent group docker || groupadd docker
     --listen unix:///run/containerd.sock      \
     --shim /usr/bin/shim.sh &
 
+while test \! -e /run/containerd.sock;
+do
+      sleep 0.1
+done
+
 # Run all the installed containers
 mkdir -p /run/docker/plugins/
 ls -1 /usr/libexec/docker/*plugin |  \
