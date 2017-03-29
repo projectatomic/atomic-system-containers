@@ -8,7 +8,7 @@ System Containers.
 
 Describes the architecture of the image.
 
-This label is RECOMMENDED.
+This label is RECOMMENDED. It is REQUIRED for Fedora.
 
 ### Example
 ```
@@ -55,6 +55,8 @@ build-date="2017-12-01T10:30:30Z"
 
 Denotes the [Red Hat Bugzilla](https://bugzilla.redhat.com) component
 related to this image.
+
+This label is REQUIRED for Fedora.
 
 ### Example
 ```
@@ -200,6 +202,8 @@ sigstore-type="docker"
 
 The release of the image.
 
+This label is REQUIRED for Fedora.
+
 ### Example
 ```
 release="10.f26"
@@ -314,7 +318,7 @@ vendor="Me"
 
 The version of the image.
 
-This label is RECOMMENDED.
+This label is RECOMMENDED. It is REQUIRED for Fedora.
 
 ### Example
 ```
