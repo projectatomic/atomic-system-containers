@@ -154,6 +154,16 @@
 		"mode=755"
 	    ]
 	},
+        {
+            "type": "bind",
+            "source": "/var/log",
+            "destination": "/var/log",
+            "options": [
+                "rbind",
+                "rslave",
+                "rw"
+            ]
+        },
 	{
 	    "type": "bind",
 	    "source": "${STATE_DIRECTORY}",
