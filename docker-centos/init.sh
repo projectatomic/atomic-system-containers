@@ -29,6 +29,7 @@ do
 done
 
 exec /usr/bin/docker-current daemon \
+          --authorization-plugin=rhel-push-plugin \
           --add-runtime oci=/usr/libexec/docker/docker-runc-current \
           --default-runtime=oci \
           --containerd /run/containerd.sock \
