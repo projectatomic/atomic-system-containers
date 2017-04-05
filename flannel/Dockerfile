@@ -1,14 +1,14 @@
-FROM fedora:rawhide
+FROM registry.fedoraproject.org/fedora:rawhide
 
 ENV container=docker FLANNELD_ETCD_ENDPOINTS="http://127.0.0.1:2379" FLANNELD_ETCD_PREFIX="/atomic.io/network"
 
-ENV VERSION=0.1 RELEASE=2 ARCH=x86_64
-LABEL BZComponent="flannel" \
-      Name="$FGC/flannel" \
-      Version="$VERSION" \
-      Release="$RELEASE.$DISTTAG" \
-      Architecture="$ARCH" \
-      Summary="An etcd driven address agent, intended to be run as a system container" \
+ENV VERSION=0.1 RELEASE=8 ARCH=x86_64
+LABEL com.redhat.component="flannel" \
+      name="$FGC/flannel" \
+      version="$VERSION" \
+      release="$RELEASE.$DISTTAG" \
+      architecture="$ARCH" \
+      summary="An etcd driven address agent, intended to be run as a system container" \
       maintainer="Giuseppe Scrivano <gscrivan@redhat.com>" \
       atomic.type='system'
 
