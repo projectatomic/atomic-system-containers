@@ -1,12 +1,12 @@
-FROM fedora:rawhide
+FROM registry.fedoraproject.org/fedora:rawhide
 
-ENV VERSION=0.1 RELEASE=3 ARCH=x86_64
-LABEL BZComponent="etcd" \
-      Name="$FGC/etcd" \
-      Version="$VERSION" \
-      Release="$RELEASE.$DISTTAG" \
-      Architecture="$ARCH" \
-      Summary="A key-value store for shared configuration and service discovery." \
+ENV VERSION=0.1 RELEASE=10 ARCH=x86_64
+LABEL com.redhat.component="etcd" \
+      name="$FGC/etcd" \
+      version="$VERSION" \
+      release="$RELEASE.$DISTTAG" \
+      architecture="$ARCH" \
+      summary="A key-value store for shared configuration and service discovery." \
       maintainer="Giuseppe Scrivano <gscrivan@redhat.com>"
 
 RUN dnf -y --setopt=tsflags=nodocs install etcd hostname && \
