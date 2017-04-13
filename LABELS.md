@@ -16,6 +16,20 @@ architecture="x86_64"
 ```
 
 
+## atomic.run
+
+Denotes the type of run to the atomic command. This label should be provided
+and set to once if the resulting install of this image should be executed
+and then removed.
+
+**Options**: once
+
+### Example
+```
+atomic.type="once"
+```
+
+
 ## atomic.type
 
 Denotes the type of image to the atomic command. If the image is to be used
