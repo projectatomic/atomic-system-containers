@@ -1,6 +1,10 @@
 FROM centos
 
-LABEL maintainer="Giuseppe Scrivano <gscrivan@redhat.com>"
+LABEL maintainer="Giuseppe Scrivano <gscrivan@redhat.com>" \
+      name="docker-centos" \
+      version="0.1" \
+      atomic.type="system" \
+      architecture="x86_64"
 
 
 RUN yum install --setopt=tsflags=nodocs -y docker container-selinux cloud-utils-growpart python-docker-py docker-novolume-plugin docker-lvm-plugin lvm2 iptables procps-ng xz oci-register-machine && \
