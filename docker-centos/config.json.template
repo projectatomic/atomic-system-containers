@@ -236,13 +236,23 @@
 	},
 	{
 	    "type": "bind",
-	    "source": "/etc",
-	    "destination": "/etc",
+	    "source": "/etc/$NAME",
+	    "destination": "/etc/docker",
 	    "options": [
 		"rbind",
 		"rprivate",
 		"rw",
 		"mode=755"
+	    ]
+	},
+	{
+	    "type": "bind",
+	    "source": "/etc/group",
+	    "destination": "/etc/group",
+	    "options": [
+                "ro",
+		"rbind",
+		"rprivate"
 	    ]
 	},
 	{
@@ -302,7 +312,7 @@
 	},
 	{
 	    "type": "bind",
-	    "source": "${RUN_DIRECTORY}",
+	    "source": "/var/run/$NAME",
 	    "destination": "/run",
 	    "options": [
 		"rshared",
@@ -323,7 +333,7 @@
         },
 	{
 	    "type": "bind",
-	    "source": "${STATE_DIRECTORY}",
+	    "source": "/var/lib/$NAME",
 	    "destination": "/var/lib",
 	    "options": [
 		"rbind",

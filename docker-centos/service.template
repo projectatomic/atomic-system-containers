@@ -1,18 +1,18 @@
 [Unit]
-Description=Docker service
+Description=$NAME Docker service
 After=network.target
 
 [Service]
-EnvironmentFile=-/etc/sysconfig/docker
-EnvironmentFile=-/etc/sysconfig/docker-storage
-EnvironmentFile=-/etc/sysconfig/docker-network
+EnvironmentFile=-/etc/$NAME/sysconfig/docker
+EnvironmentFile=-/etc/$NAME/sysconfig/docker-storage
+EnvironmentFile=-/etc/$NAME/sysconfig/docker-network
 Environment=GOTRACEBACK=crash
-ExecStartPre=/bin/bash -c 'export -p > /run/docker-bash-env'
+ExecStartPre=/bin/bash -c 'export -p > /run/$NAME-docker-bash-env'
 ExecStart=$EXEC_START
 ExecStop=$EXEC_STOP
 Restart=on-failure
 WorkingDirectory=$DESTDIR
-RuntimeDirectory=docker
+RuntimeDirectory=$NAME
 LimitNOFILE=1048576
 LimitNPROC=1048576
 LimitCORE=infinity
