@@ -98,7 +98,9 @@ def check_git(path):
                 log(i, "file has not staged changes")
 
 def get_go_os_arch():
-        res = subprocess.check_output(["go", "tool", "dist", "list", "-json"])
+    go_command = ["go", "tool", "dist", "list", "-json"]
+    try:
+        res = subprocess.check_output(go_command)
         os_arch = {}
         for i in json.loads(res):
             os, arch = i['GOOS'], i['GOARCH']
@@ -106,6 +108,29 @@ def get_go_os_arch():
             tmp[arch] = True
             os_arch[os] = tmp
         return os_arch
+    except subprocess.CalledProcessError:
+        # Back up for older go versions
+        print(colored("Unable to find arch using '{}'".format(" ".join(go_command)), COLOR_YELLOW))
+        go_os = ""
+        go_arch = ""
+        backup_command = ["go", "tool", "dist", "env"]
+        try:
+            res = subprocess.check_output(backup_command)
+            for line in res.split("\n")[:-1]:
+                k, v = line.split("=", 1)
+                if k == "GOOS":
+                    go_os = v[1:-1]
+                elif k == "GOARCH":
+                    go_arch = v[1:-1]
+            if not go_os or not go_arch:
+                raise Exception("OS and ARCH not found")
+            return {go_os: {go_arch: True}}
+        except Exception as error:
+            print(colored(
+                "Unable to use '{}' to find arch. Giving up...".format(
+                    " ".join(backup_command)), COLOR_RED))
+            raise SystemExit(1)
+
 
 def check_config_json(path):
     os_arch = get_go_os_arch()
