@@ -5,9 +5,6 @@
     "containerd": "/run/containerd.sock",
     "exec-opts": ["native.cgroupdriver=systemd"],
     "runtimes": {
-        "runc": {
-            "path": "runc"
-        },
 	"oci": {
 	    "path": "/usr/libexec/docker/docker-runc-current"
 	}
