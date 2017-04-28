@@ -29,11 +29,7 @@ do
 done
 
 exec /usr/bin/docker-current daemon \
-          --authorization-plugin=rhel-push-plugin \
-          --add-runtime oci=/usr/libexec/docker/docker-runc-current \
-          --default-runtime=oci \
-          --containerd /run/containerd.sock \
-          --exec-opt native.cgroupdriver=systemd \
+          --config-file=/etc/docker/daemon.json \
           --userland-proxy-path=/usr/libexec/docker/docker-proxy-current \
           $OPTIONS \
           $DOCKER_STORAGE_OPTIONS \
