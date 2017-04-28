@@ -1,0 +1,13 @@
+
+{
+    "authorization-plugins": ["rhel-push-plugin"],
+    "default-runtime": "oci",
+    "containerd": "/run/containerd.sock",
+    "userland-proxy-path": "/usr/libexec/docker/docker-proxy-current",
+    "exec-opts": ["native.cgroupdriver=systemd"],
+    "runtimes": {
+	"oci": {
+	    "path": "/usr/libexec/docker/docker-runc-current"
+	}
+    }
+}
