@@ -1,10 +1,14 @@
 # docker-centos
 
+## Docker Command
+
+```sudo docker -H unix:///var/run/$NAME/docker.sock images```
+
 ## File Locations
 
 ### Configuration
 
-Configuration for docker-centos lives in ``/etc/docker-$NAME``, where
+Configuration for docker-centos lives in ``/etc/$NAME``, where
 ``$NAME`` is the name of the container. As an example, if the container was
 built as ``dockercentos``, the configuration path would be
 ``/etc/docker-dockercentos``.
@@ -14,12 +18,12 @@ built as ``dockercentos``, the configuration path would be
 
 ### Run Directory
 
-The run directory is set to ``/var/run/docker-$NAME``.
+The run directory is set to ``/var/run/$NAME``.
 
 
 ### State Directory
 
-The state directory is set to ``/var/lib/docker-$NAME``.
+The state directory is set to ``/var/lib/$NAME``.
 
 
 ## Building
