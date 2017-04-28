@@ -1,0 +1,9 @@
+{
+    "version": "1.0",
+    "defaultValues": {},
+    "renameFiles" : {
+        "/etc/docker-container": "/etc/$NAME",
+        "/var/lib/docker-container": "/var/lib/$NAME",
+        "/var/run/docker-container": "/var/run/$NAME"
+    }
+}
