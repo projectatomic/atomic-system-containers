@@ -13,12 +13,13 @@ mkdir -p /usr/lib/modules && \
 yum-config-manager --nogpgcheck --add-repo https://cbs.centos.org/repos/virt7-docker-el-candidate/x86_64/os/ && \
 yum install --setopt=tsflags=nodocs -y --nogpgcheck docker-rhel-push-plugin && \
 rpm -V docker-rhel-push-plugin && \
-mkdir -p /exports/hostfs/etc/ && \
+mkdir -p /exports/hostfs/etc/docker && \
 yum clean all
 
 ADD init.sh /usr/bin
 
 # system container
 COPY service.template tmpfiles.template config.json.template /exports/
+COPY daemon.json /exports/hostfs/etc/docker/
 
 CMD ["/usr/bin/init.sh"]
