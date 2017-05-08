@@ -3,7 +3,6 @@ Description=Docker service
 After=network.target
 
 [Service]
-EnvironmentFile=-/etc/sysconfig/docker
 EnvironmentFile=-/etc/sysconfig/docker-storage
 EnvironmentFile=-/etc/sysconfig/docker-network
 Environment=GOTRACEBACK=crash
