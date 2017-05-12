@@ -1,10 +1,15 @@
-FROM fedora:rawhide
+FROM registry.fedoraproject.org/fedora:rawhide
 
-LABEL maintainer="Giuseppe Scrivano <gscrivan@redhat.com>" \
-      name="docker-fedora" \
-      version="0.1" \
-      atomic.type="system" \
-      architecture="x86_64"
+ENV VERSION=0.1 RELEASE=1 ARCH=x86_64
+LABEL com.redhat.component="container-engine" \
+      name="$FGC/container-engine" \
+      version="$VERSION" \
+      release="$RELEASE.$DISTTAG" \
+      architecture="$ARCH" \
+      usage="atomic install --system --system-package=no container-engine && systemctl start container-engine"
+      summary="The docker container engine as a system container." \
+      maintainer="Giuseppe Scrivano <gscrivan@redhat.com>" \
+      atomic.type="system"
 
 RUN dnf install --setopt=tsflags=nodocs -y docker container-storage-setup container-selinux cloud-utils-growpart python-docker-py docker-novolume-plugin lvm2 iptables procps-ng xz oci-register-machine \
     && rpm -V docker container-storage-setup container-selinux cloud-utils-growpart python-docker-py docker-novolume-plugin lvm2 iptables procps-ng xz oci-register-machine \
