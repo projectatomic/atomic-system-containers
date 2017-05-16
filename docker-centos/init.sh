@@ -18,7 +18,7 @@ do
     $i &
 done
 
-/usr/bin/docker-containerd-current \
+NOTIFY_SOCKET=/dev/null /usr/bin/docker-containerd-current \
     --listen unix:///run/containerd.sock \
     --shim /usr/bin/docker-containerd-shim-current \
     --start-timeout 2m &
