@@ -6,7 +6,7 @@ LABEL com.redhat.component="container-engine" \
       version="$VERSION" \
       release="$RELEASE.$DISTTAG" \
       architecture="$ARCH" \
-      usage="atomic install --system --system-package=no container-engine && systemctl start container-engine"
+      usage="atomic install --system --system-package=no container-engine && systemctl start container-engine" \
       summary="The docker container engine as a system container." \
       maintainer="Giuseppe Scrivano <gscrivan@redhat.com>" \
       atomic.type="system"
