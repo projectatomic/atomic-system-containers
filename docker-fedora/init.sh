@@ -10,7 +10,10 @@ source /run/docker-bash-env
 
 getent group docker || groupadd docker
 
-/usr/libexec/docker/docker-containerd-current \
+
+# Inhibit sd-notify for docker-containerd, we want to get the notification
+# from the docker process
+NOTIFY_SOCKET=/dev/null /usr/libexec/docker/docker-containerd-current \
     --listen unix:///run/containerd.sock      \
     --shim /usr/bin/shim.sh &
 
