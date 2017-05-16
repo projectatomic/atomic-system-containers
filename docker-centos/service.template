@@ -16,6 +16,8 @@ LimitNOFILE=1048576
 LimitNPROC=1048576
 LimitCORE=infinity
 TimeoutStartSec=0
+Type=notify
+NotifyAccess=all
 
 [Install]
 WantedBy=multi-user.target
