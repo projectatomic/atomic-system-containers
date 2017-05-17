@@ -18,6 +18,8 @@ do
     $i &
 done
 
+# Inhibit sd-notify for docker-containerd, we want to get the notification
+# from the docker process
 NOTIFY_SOCKET=/dev/null /usr/bin/docker-containerd-current \
     --listen unix:///run/containerd.sock \
     --shim /usr/bin/docker-containerd-shim-current \
