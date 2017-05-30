@@ -19,6 +19,7 @@ System containers use different technologies:
  * We use the [atomic](https://github.com/projectatomic/atomic) tool to install
  system containers.
  * [Labels](LABELS.md) can influence how the *atomic tool* uses a system container
+ * Specific [files](FILES.md) are required to be part of a valid system image
  * For storage system containers do not need to use COW File systems, since
  they are in production. We default to using OSTree for storage of the
  container images.
