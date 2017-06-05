@@ -33,7 +33,7 @@ do
 done
 
 exec /usr/bin/dockerd-current \
-     --config-file=/etc/docker/daemon.json \
+     --config-file=/etc/docker/container-daemon.json \
      $OPTIONS \
      $DOCKER_STORAGE_OPTIONS \
      $DOCKER_NETWORK_OPTIONS \
