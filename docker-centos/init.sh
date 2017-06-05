@@ -31,7 +31,7 @@ do
 done
 
 exec /usr/bin/docker-current daemon \
-          --config-file=/etc/docker/daemon.json \
+          --config-file=/etc/docker/container-daemon.json \
           --userland-proxy-path=/usr/libexec/docker/docker-proxy-current \
           $OPTIONS \
           $DOCKER_STORAGE_OPTIONS \
