@@ -22,6 +22,6 @@ COPY shim.sh init.sh /usr/bin/
 # system container
 COPY set_mounts.sh /
 COPY config.json.template service.template tmpfiles.template /exports/
-COPY daemon.json /exports/hostfs/etc/docker/
+COPY daemon.json /exports/hostfs/etc/docker/container-daemon.json
 
 CMD ["/usr/bin/init.sh"]
