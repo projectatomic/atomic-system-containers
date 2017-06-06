@@ -23,5 +23,7 @@ COPY shim.sh init.sh /usr/bin/
 COPY set_mounts.sh /
 COPY config.json.template service.template tmpfiles.template /exports/
 COPY daemon.json /exports/hostfs/etc/docker/container-daemon.json
+# https://github.com/rhatdan/oci-umount/issues/2
+COPY oci-umount.conf /exports/hostfs/etc/oci-umount.conf
 
 CMD ["/usr/bin/init.sh"]
