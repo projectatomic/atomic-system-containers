@@ -1,6 +1,6 @@
 FROM registry.fedoraproject.org/fedora:rawhide
 
-ENV VERSION=0.1 RELEASE=1 ARCH=x86_64
+ENV VERSION=0 RELEASE=1 ARCH=x86_64
 LABEL com.redhat.component="container-engine" \
       name="$FGC/container-engine" \
       version="$VERSION" \
@@ -17,6 +17,7 @@ RUN dnf install --setopt=tsflags=nodocs -y docker container-storage-setup contai
 
 RUN ln -s /usr/libexec/docker/docker-runc-current /usr/bin/docker-runc
 
+COPY README.md /
 COPY shim.sh init.sh /usr/bin/
 
 # system container
