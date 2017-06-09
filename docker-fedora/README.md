@@ -1,18 +1,17 @@
-# container-engine
+# docker
 
-This is the container engine system container for fedora systems based on the moby project.
+This is the docker daemon system container for Fedora systems based on the moby project.
 For more information refer to: https://github.com/moby/moby
 
 Note this only provides the *daemon process*, and does not include CLI tools. The current use
-case for this would be switching between different versions of the engine by updating the
-container.
+case for this would be switching between different versions of docker by updating the container.
 
 ## Building the image from source:
 
 ```
 # git clone https://github.com/projectatomic/atomic-system-containers
 # cd atomic-system-containers/docker-fedora
-# docker build -t container-engine .
+# docker build -t docker .
 ```
 
 ## Running the system container, with the atomic CLI:
@@ -20,13 +19,13 @@ container.
 Pull from registry into ostree:
 
 ```
-# atomic pull --storage ostree $REGISTRY/container-engine
+# atomic pull --storage ostree $REGISTRY/docker
 ```
 
 Or alternatively, pull from local docker:
 
 ```
-# atomic pull --storage ostree docker:container-engine:latest
+# atomic pull --storage ostree docker:docker:latest
 ```
 
 Install the container:
@@ -36,23 +35,26 @@ during installation. This flag will tell the atomic CLI to fall back to copying 
 host instead.
 
 ```
-# atomic install --system --system-package=no --name=container-engine ($REGISTRY)/container-engine
+# atomic install --system --system-package=no --name=docker ($REGISTRY)/docker
+
+Note that if you have the package docker locally, you would need to use another
+name for the service (i.e. --name=docker-system-container, etc.)
 ```
 
 Start as a systemd service:
 
 ```
-# systemctl start container-engine
+# systemctl start docker
 ```
 
 Stopping the service
 
 ```
-# systemctl stop container-engine
+# systemctl stop docker
 ```
 
 Removing the container
 
 ```
-# atomic uninstall container-engine
+# atomic uninstall docker
 ```
