@@ -1,13 +1,13 @@
 FROM registry.fedoraproject.org/fedora:rawhide
 
 ENV VERSION=0 RELEASE=1 ARCH=x86_64
-LABEL com.redhat.component="container-engine" \
-      name="$FGC/container-engine" \
+LABEL com.redhat.component="docker" \
+      name="docker" \
       version="$VERSION" \
       release="$RELEASE.$DISTTAG" \
       architecture="$ARCH" \
-      usage="atomic install --system --system-package=no container-engine && systemctl start container-engine" \
-      summary="The docker container engine as a system container." \
+      usage="atomic install --system --system-package=no docker && systemctl start docker" \
+      summary="The docker daemon as a system container." \
       maintainer="Giuseppe Scrivano <gscrivan@redhat.com>" \
       atomic.type="system"
 
