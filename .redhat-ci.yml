@@ -6,6 +6,7 @@ packages:
     - findutils
     - git
     - golang-bin
+    - yajl
 
 tests:
     - ./test.sh
