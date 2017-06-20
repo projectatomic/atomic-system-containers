@@ -16,6 +16,9 @@ RUN dnf -y --setopt=tsflags=nodocs install flannel && dnf clean all
 
 ADD flanneld-run.sh /usr/bin/
 
+RUN mkdir -p /exports/hostfs/etc/sysconfig/ && cp /etc/sysconfig/flanneld /exports/hostfs/etc/sysconfig/
+RUN mkdir -p /exports/hostfs/etc/flanneld
+
 # System container files
 COPY tmpfiles.template service.template manifest.json \
      config.json.template /exports/
