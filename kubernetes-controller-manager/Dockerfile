@@ -4,11 +4,11 @@ MAINTAINER "Jason Brooks" <jbrooks@redhat.com>
 ENV container=docker
 
 ENV NAME=kubernetes-controller-manager VERSION=0.1 RELEASE=8 ARCH=x86_64
-LABEL BZComponent="$NAME" \
-        Name="$FGC/$NAME" \
-        Version="$VERSION" \
-        Release="$RELEASE.$DISTTAG" \
-        Architecture="$ARCH" \
+LABEL bzcomponent="$NAME" \
+        name="$FGC/$NAME" \
+        version="$VERSION" \
+        release="$RELEASE.$DISTTAG" \
+        architecture="$ARCH" \
         atomic.type='system'
 
 COPY launch.sh /usr/bin/kube-controller-manager-docker.sh
