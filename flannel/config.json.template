@@ -23,30 +23,35 @@
 		"cwd": "/",
                 "capabilities": {
                         "bounding": [
+                                "CAP_DAC_READ_SEARCH",
                                 "CAP_AUDIT_WRITE",
                                 "CAP_KILL",
                                 "CAP_NET_BIND_SERVICE",
                                 "CAP_NET_ADMIN"
                         ],
                         "permitted": [
+                                "CAP_DAC_READ_SEARCH",
                                 "CAP_AUDIT_WRITE",
                                 "CAP_KILL",
                                 "CAP_NET_BIND_SERVICE",
                                 "CAP_NET_ADMIN"
                         ],
                         "inheritable": [
+                                "CAP_DAC_READ_SEARCH",
                                 "CAP_AUDIT_WRITE",
                                 "CAP_KILL",
                                 "CAP_NET_BIND_SERVICE",
                                 "CAP_NET_ADMIN"
                         ],
                         "effective": [
+                                "CAP_DAC_READ_SEARCH",
                                 "CAP_AUDIT_WRITE",
                                 "CAP_KILL",
                                 "CAP_NET_BIND_SERVICE",
                                 "CAP_NET_ADMIN"
                         ],
                         "ambient": [
+                                "CAP_DAC_READ_SEARCH",
                                 "CAP_AUDIT_WRITE",
                                 "CAP_KILL",
                                 "CAP_NET_BIND_SERVICE",
@@ -170,7 +175,27 @@
                                 "rbind",
                                 "rprivate"
                         ]
-        }
+                },
+                {
+                        "source": "/etc/sysconfig/flanneld",
+                        "destination": "/etc/sysconfig/flanneld",
+                        "type": "bind",
+                        "options": [
+                                "rw",
+                                "rbind",
+                                "rprivate"
+                        ]
+                },
+                {
+                        "source": "/etc/flanneld",
+                        "destination": "/etc/flanneld",
+                        "type": "bind",
+                        "options": [
+                                "rw",
+                                "rbind",
+                                "rprivate"
+                        ]
+                }
 	],
 	"hooks": {},
 	"linux": {
