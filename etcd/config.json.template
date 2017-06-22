@@ -17,6 +17,7 @@
 		"env": [
 			"NAME=$NAME",
 			"ETCD_NAME=$ETCD_NAME",
+                        "ETCD_DATA_DIR=$ETCD_DATA_DIR",
 			"ETCD_ADVERTISE_CLIENT_URLS=$ETCD_ADVERTISE_CLIENT_URLS",
 			"ETCD_LISTEN_CLIENT_URLS=$ETCD_LISTEN_CLIENT_URLS",
 			"ETCD_INITIAL_ADVERTISE_PEER_URLS=$ETCD_INITIAL_ADVERTISE_PEER_URLS",
@@ -207,7 +208,7 @@
                  },
                  {
                          "type": "bind",
-                         "source": "/etc/etcd/",
+                         "source": "$CONF_DIRECTORY/$NAME",
                          "destination": "/etc/etcd/",
                          "options": [
                                  "rbind",
