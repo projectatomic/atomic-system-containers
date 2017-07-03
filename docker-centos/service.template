@@ -6,6 +6,7 @@ After=network.target
 EnvironmentFile=-/etc/sysconfig/docker-storage
 EnvironmentFile=-/etc/sysconfig/docker-network
 Environment=GOTRACEBACK=crash
+SELinuxContext=system_u:system_r:container_runtime_t:s0
 ExecStartPre=/bin/bash -c 'export -p > /run/docker-bash-env'
 ExecStart=$EXEC_START
 ExecStop=$EXEC_STOP
