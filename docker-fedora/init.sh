@@ -27,7 +27,7 @@ do
       sleep 0.1
 done
 
-# Run all the installed containers
+# Run all the installed plugins
 mkdir -p /run/docker/plugins/
 ls -1 /usr/libexec/docker/*plugin |  \
 while read i;
