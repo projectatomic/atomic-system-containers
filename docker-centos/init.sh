@@ -13,7 +13,7 @@ printf %s $LABEL > /proc/self/attr/exec
 
 source /run/docker-bash-env
 
-# Run all the installed containers
+# Run all the installed plugins
 mkdir -p /run/docker/plugins/
 ls -1 /usr/libexec/docker/*plugin |  \
 while read i;
