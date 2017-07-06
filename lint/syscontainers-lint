@@ -35,7 +35,8 @@ all_files = [
     "tmpfiles.template"
 ]
 
-found_any_issue = False
+found_any_warning = False
+found_any_error = False
 
 (COLOR_BLACK,
  COLOR_RED,
@@ -53,8 +54,11 @@ def colored(line, color):
         return line
 
 def log(location, msg, is_error=False):
-    global found_any_issue
-    found_any_issue = True
+    global found_any_warning, found_any_error
+    found_any_warning = True
+    if is_error:
+        found_any_error = True
+
     print(colored("%s: %s" %(location, msg), COLOR_RED if is_error else COLOR_YELLOW))
 
 def check_dockerfile(path, dockerfile):
@@ -62,6 +66,14 @@ def check_dockerfile(path, dockerfile):
         content = f.read()
     content = re.sub("#.*\n", "", content)
     content = content.replace("\\\n", "")
+    if re.search('\nMAINTAINER.*\n', content):
+        log('Dockerfile', "Found MAINTAINER $NAME.  Please use LABEL maintainer=$NAME")
+    if re.search('(COPY|ADD) .* /export/?\n', content):
+        log('Dockerfile', "Found /export.  Did you mean /exports/?")
+    if re.search('\nRUN.*(dnf|yum).*install', content):
+        if not re.search('tsflags=nodocs', content):
+            log('Dockerfile', "Found 'dnf/yum install' command without '--setopt=tsflags=nodocs'. " \
+                "Please add the flag to reduce image size unless there is need for documentation.")
     for i in all_files:
         if os.path.exists(os.path.join(path, i)):
             if re.search('ADD .*%s.* /exports/' % i , content):
@@ -85,7 +97,44 @@ def check_git(path):
             if  "modified" in subprocess.check_output(["git", "-C", path, "status", i]):
                 log(i, "file has not staged changes")
 
+def get_go_os_arch():
+    go_command = ["go", "tool", "dist", "list", "-json"]
+    try:
+        res = subprocess.check_output(go_command)
+        os_arch = {}
+        for i in json.loads(res):
+            os, arch = i['GOOS'], i['GOARCH']
+            tmp = os_arch.get(os, {})
+            tmp[arch] = True
+            os_arch[os] = tmp
+        return os_arch
+    except subprocess.CalledProcessError:
+        # Back up for older go versions
+        print(colored("Unable to find arch using '{}'".format(" ".join(go_command)), COLOR_YELLOW))
+        go_os = ""
+        go_arch = ""
+        backup_command = ["go", "tool", "dist", "env"]
+        try:
+            res = subprocess.check_output(backup_command)
+            for line in res.split("\n")[:-1]:
+                k, v = line.split("=", 1)
+                if k == "GOOS":
+                    go_os = v[1:-1]
+                elif k == "GOARCH":
+                    go_arch = v[1:-1]
+            if not go_os or not go_arch:
+                raise Exception("OS and ARCH not found")
+            return {go_os: {go_arch: True}}
+        except Exception as error:
+            print(colored(
+                "Unable to use '{}' to find arch. Giving up...".format(
+                    " ".join(backup_command)), COLOR_RED))
+            raise SystemExit(1)
+
+
 def check_config_json(path):
+    os_arch = get_go_os_arch()
+
     if os.path.exists(os.path.join(path, "config.json")):
         basename = "config.json"
         template = False
@@ -100,6 +149,12 @@ def check_config_json(path):
         content = f.read()
 
     config = json.loads(content)
+    spec_os, spec_arch = config['platform']['os'], config['platform']['arch']
+    if spec_os not in os_arch.keys():
+        log(basename, "Invalid os specified: `%s`" % spec_os, is_error=True)
+    if spec_arch not in os_arch[spec_os].keys():
+        log(basename, "Invalid arch specified for the OS: `%s`" % spec_arch, is_error=True)
+
     for b in config['mounts']:
         if not 'source' in b:
             continue
@@ -114,6 +169,8 @@ def check_config_json(path):
             log(basename, "Path must be 'rootfs'")
     if not config['root']['readonly']:
             log(basename, "Readonly must be true", is_error=True)
+    if config['process']['terminal']:
+            log(basename, "process/terminal must be false", is_error=True)
 
 def check_systemd_unit(path):
     basename = "service.template"
@@ -173,7 +230,7 @@ def check_manifest_json(path):
         log(basename, "Missing default value for %s" % i)
 
 def check(path):
-    global found_any_issue
+    global found_any_warning
     if not os.path.exists(path):
         raise LintRuntimeError("The path %s does not exist" % path)
     dockerfilepath = os.path.join(path, "Dockerfile")
@@ -184,7 +241,7 @@ def check(path):
     check_config_json(path)
     check_systemd_unit(path)
     check_manifest_json(path)
-    if not found_any_issue:
+    if not found_any_warning:
         print(colored("All Good!", COLOR_GREEN))
 
 if __name__ == '__main__':
@@ -196,4 +253,7 @@ if __name__ == '__main__':
         check(sys.argv[1])
     except LintRuntimeError as e:
         print(e.error)
+        sys.exit(1)
+
+    if found_any_error:
         sys.exit(1)

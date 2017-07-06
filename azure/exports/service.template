@@ -1,0 +1,14 @@
+[Unit]
+Description=WALA Agent
+Wants=network-online.target sshd.service sshd-keygen.service
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/python  -u /usr/sbin/waagent -daemon
+Restart=always
+RestartSec=5
+WorkingDirectory=${DESTDIR}/rootfs
+RuntimeDirectory=${NAME}
+
+[Install]
+WantedBy=multi-user.target

@@ -1,13 +1,30 @@
-FROM fedora:rawhide
+FROM registry.fedoraproject.org/fedora:rawhide
 
-LABEL maintainer="Giuseppe Scrivano <gscrivan@redhat.com>"
+ENV VERSION=0 RELEASE=1 ARCH=x86_64
+LABEL com.redhat.component="docker" \
+      name="docker" \
+      version="$VERSION" \
+      release="$RELEASE.$DISTTAG" \
+      architecture="$ARCH" \
+      usage="atomic install --system --system-package=no docker && systemctl start docker" \
+      summary="The docker daemon as a system container." \
+      maintainer="Giuseppe Scrivano <gscrivan@redhat.com>" \
+      atomic.type="system"
 
-RUN dnf install -y docker container-selinux cloud-utils-growpart python-docker-py docker-novolume-plugin lvm2 iptables procps-ng xz inotify-tools && mkdir -p /usr/lib/modules && dnf clean all
+RUN dnf install --setopt=tsflags=nodocs -y docker container-storage-setup container-selinux cloud-utils-growpart python-docker-py docker-novolume-plugin lvm2 iptables procps-ng xz oci-register-machine \
+    && rpm -V docker container-storage-setup container-selinux cloud-utils-growpart python-docker-py docker-novolume-plugin lvm2 iptables procps-ng xz oci-register-machine \
+    && mkdir -p /usr/lib/modules && dnf clean all
 
-ADD shim.sh init.sh /usr/bin/
+RUN ln -s /usr/libexec/docker/docker-runc-current /usr/bin/docker-runc
+
+COPY README.md /
+COPY shim.sh init.sh /usr/bin/
 
 # system container
-ADD set_chroot.sh unset_chroot.sh /
-COPY service.template tmpfiles.template /exports/
+COPY set_mounts.sh /
+COPY config.json.template service.template tmpfiles.template /exports/
+COPY daemon.json /exports/hostfs/etc/docker/container-daemon.json
+# https://github.com/rhatdan/oci-umount/issues/2
+RUN cp /etc/oci-umount.conf /exports/hostfs/etc
 
 CMD ["/usr/bin/init.sh"]

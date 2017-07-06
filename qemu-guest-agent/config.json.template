@@ -1,0 +1,283 @@
+{
+
+	"ociVersion": "1.0.0-rc3",
+	"platform": {
+		"os": "linux",
+		"arch": "amd64"
+	},
+	"process": {
+		"terminal": false,
+		"user": {
+			"uid": 0,
+			"gid": 0
+		},
+		"args": [
+			"/usr/bin/qemu-ga"
+		],
+		"env": [
+			"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+			"TERM=xterm",
+			"HOST=/host",
+			"container=1",
+			"IMAGE=qemu-guest-agent",
+			"NAME=qemu-guest-agent"
+		],
+		"cwd": "/",
+		"capabilities": [
+			"CAP_CHOWN",
+			"CAP_DAC_OVERRIDE",
+			"CAP_DAC_READ_SEARCH",
+			"CAP_FOWNER",
+			"CAP_FSETID",
+			"CAP_KILL",
+			"CAP_SETGID",
+			"CAP_SETUID",
+			"CAP_SETPCAP",
+			"CAP_LINUX_IMMUTABLE",
+			"CAP_NET_BIND_SERVICE",
+			"CAP_NET_BROADCAST",
+			"CAP_NET_ADMIN",
+			"CAP_NET_RAW",
+			"CAP_IPC_LOCK",
+			"CAP_IPC_OWNER",
+			"CAP_SYS_MODULE",
+			"CAP_SYS_RAWIO",
+			"CAP_SYS_CHROOT",
+			"CAP_SYS_PTRACE",
+			"CAP_SYS_PACCT",
+			"CAP_SYS_ADMIN",
+			"CAP_SYS_BOOT",
+			"CAP_SYS_NICE",
+			"CAP_SYS_RESOURCE",
+			"CAP_SYS_TIME",
+			"CAP_SYS_TTY_CONFIG",
+			"CAP_MKNOD",
+			"CAP_LEASE",
+			"CAP_SETFCAP",
+			"CAP_MAC_OVERRIDE",
+			"CAP_MAC_ADMIN",
+			"CAP_SYSLOG",
+			"CAP_WAKE_ALARM",
+			"CAP_BLOCK_SUSPEND"
+		],
+		"rlimits": [
+			{
+				"type": "RLIMIT_NOFILE",
+				"hard": 1024,
+				"soft": 1024
+			}
+		]
+	},
+	"root": {
+		"path": "rootfs",
+		"readonly": true
+	},
+	"mounts": [
+		{
+			"destination": "/proc",
+			"type": "proc",
+			"source": "proc"
+		},
+		{
+			"destination": "/dev",
+			"type": "tmpfs",
+			"source": "tmpfs",
+			"options": [
+				"nosuid",
+				"strictatime",
+				"mode=755",
+				"size=65536k"
+			]
+		},
+		{
+			"destination": "/dev/pts",
+			"type": "devpts",
+			"source": "devpts",
+			"options": [
+				"nosuid",
+				"noexec",
+				"newinstance",
+				"ptmxmode=0666",
+				"mode=0620",
+				"gid=5"
+			]
+		},
+		{
+			"destination": "/dev/shm",
+			"type": "tmpfs",
+			"source": "shm",
+			"options": [
+				"nosuid",
+				"noexec",
+				"nodev",
+				"mode=1777",
+				"size=65536k"
+			]
+		},
+		{
+			"destination": "/dev/mqueue",
+			"type": "mqueue",
+			"source": "mqueue",
+			"options": [
+				"nosuid",
+				"noexec",
+				"nodev"
+			]
+		},
+		{
+			"destination": "/sys",
+			"type": "sysfs",
+			"source": "sysfs",
+			"options": [
+				"nosuid",
+				"noexec",
+				"nodev",
+				"rw"
+			]
+		},
+		{
+			"destination": "/tmp",
+			"type": "tmpfs",
+			"source": "tmpfs",
+			"options": [
+				"rw",
+				"noexec",
+				"nosuid",
+				"nodev",
+				"size=65536k"
+			]
+		},
+		{
+			"destination": "/run",
+			"type": "tmpfs",
+			"source": "tmpfs",
+			"options": [
+				"rw",
+				"noexec",
+				"nosuid",
+				"nodev",
+				"size=65536k"
+			]
+		},
+		{
+			"destination": "/dev/virtio-ports",
+			"type": "bind",
+			"source": "/dev/virtio-ports",
+			"options": [
+				"rw",
+				"bind"
+			]
+		},
+		{
+			"destination": "/host",
+			"type": "bind",
+			"source": "/",
+			"options": [
+				"rw",
+				"bind"
+			]
+		},
+		{
+			"source": "/etc/os-release",
+			"destination": "/etc/os-release",
+			"type": "bind",
+			"options": [
+				"ro",
+				"bind"
+			]
+		},
+		{
+			"source": "/etc/redhat-release",
+			"destination": "/etc/redhat-release",
+			"type": "bind",
+			"options": [
+				"ro",
+				"bind"
+			]
+		},
+		{
+			"source": "/var/log/qemu-ga",
+			"destination": "/var/log/qemu-ga",
+			"type": "bind",
+			"options": [
+				"rw",
+				"bind"
+			]
+		},
+		{
+			"destination": "/hostproc",
+			"type": "bind",
+			"source": "/proc",
+			"options": [
+				"rw",
+				"bind"
+			]
+		},
+		{
+			"destination": "/dev",
+			"type": "bind",
+			"source": "/dev",
+			"options": [
+				"rw",
+				"bind"
+			]
+		},
+		{
+			"destination": "/dev/pts",
+			"type": "devpts",
+			"source": "devpts",
+			"options": [
+				"nosuid",
+				"noexec",
+				"newinstance",
+				"ptmxmode=0666",
+				"mode=0620",
+				"gid=5"
+			]
+		}
+	],
+	"hooks": {},
+	"linux": {
+		"resources": {
+			"devices": [
+				{
+					"allow": true,
+					"access": "rwm"
+				}
+			]
+		},
+		"namespaces": [
+			{ "type": "mount"}
+		],
+		"devices": [
+			{
+				"path": "/dev/vport2p1",
+				"type": "c",
+				"major": 249,
+				"minor": 1,
+				"fileMode": 8576,
+				"uid": 0,
+				"gid": 0
+			},
+			{
+				"path": "/dev/vport2p2",
+				"type": "c",
+				"major": 249,
+				"minor": 2,
+				"fileMode": 8576,
+				"uid": 0,
+				"gid": 0
+			},
+			{
+				"path": "/dev/vport2p3",
+				"type": "c",
+				"major": 249,
+				"minor": 3,
+				"fileMode": 8576,
+				"uid": 0,
+				"gid": 0
+			}
+		]
+	}
+}
+

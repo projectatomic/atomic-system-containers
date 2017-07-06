@@ -1,10 +1,12 @@
 container:
-    image: fedora:24
+    image: fedora:25
 
 packages:
     - python
     - findutils
     - git
+    - golang-bin
+    - yajl
 
 tests:
     - ./test.sh

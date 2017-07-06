@@ -1,12 +1,25 @@
 FROM centos
 
-LABEL maintainer="Giuseppe Scrivano <gscrivan@redhat.com>"
+LABEL maintainer="Giuseppe Scrivano <gscrivan@redhat.com>" \
+      name="docker-centos" \
+      version="0.1" \
+      atomic.type="system" \
+      architecture="x86_64"
 
-RUN yum install -y docker docker-latest container-selinux python-docker-py docker-lvm-plugin docker-rhel-push-plugin docker-novolume-plugin lvm2 iptables procps-ng xz cloud-utils-growpart && yum clean all
+
+RUN yum install --setopt=tsflags=nodocs -y docker container-storage-setup container-selinux cloud-utils-growpart python-docker-py docker-novolume-plugin docker-lvm-plugin lvm2 iptables procps-ng xz oci-register-machine && \
+rpm -V docker container-storage-setup container-selinux cloud-utils-growpart python-docker-py docker-novolume-plugin docker-lvm-plugin lvm2 iptables procps-ng xz oci-register-machine && \
+mkdir -p /usr/lib/modules && \
+yum-config-manager --nogpgcheck --add-repo https://cbs.centos.org/repos/virt7-docker-common-candidate/x86_64/os/ && \
+yum install --setopt=tsflags=nodocs -y --nogpgcheck docker-rhel-push-plugin && \
+rpm -V docker-rhel-push-plugin && \
+mkdir -p /exports/hostfs/etc/docker && \
+yum clean all
+
 ADD init.sh /usr/bin
 
 # system container
-ADD set_chroot.sh unset_chroot.sh /
 COPY service.template tmpfiles.template config.json.template /exports/
+COPY daemon.json /exports/hostfs/etc/docker/container-daemon.json
 
 CMD ["/usr/bin/init.sh"]
