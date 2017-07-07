@@ -1,6 +1,4 @@
-
 {
-    "authorization-plugins": ["rhel-push-plugin"],
     "default-runtime": "oci",
     "containerd": "/run/containerd.sock",
     "userland-proxy-path": "/usr/libexec/docker/docker-proxy-current",
