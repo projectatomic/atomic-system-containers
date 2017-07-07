@@ -5,13 +5,13 @@ PID=$$
 LABEL=`tr -d '\000' < /proc/$PID/attr/current`
 printf %s $LABEL > /proc/self/attr/exec
 
+source /run/docker-bash-env
+
 # set storage first
 (
     . /etc/sysconfig/docker-storage-setup
     /usr/bin/docker-storage-setup
 )
-
-source /run/docker-bash-env
 
 # Run all the installed plugins
 mkdir -p /run/docker/plugins/
