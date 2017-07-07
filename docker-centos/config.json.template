@@ -5,6 +5,7 @@
 	"arch": "amd64"
     },
     "process": {
+	"selinuxLabel": "system_u:system_r:container_runtime_t:s0",
 	"terminal": false,
 	"user": {
 	    "uid": 0,
@@ -377,7 +378,6 @@
 	    {
 		"type": "mount"
 	    }
-	],
-	"selinuxProcessLabel": "system_u:system_r:container_runtime_t:s0"
+	]
     }
 }

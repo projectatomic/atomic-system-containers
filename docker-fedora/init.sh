@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Ensure that new process maintain this SELinux label
+PID=$$
+LABEL=`tr -d '\000' < /proc/$PID/attr/current`
+printf %s $LABEL > /proc/self/attr/exec
+
 source /run/docker-bash-env
 
 # set storage first
@@ -22,7 +27,7 @@ do
       sleep 0.1
 done
 
-# Run all the installed containers
+# Run all the installed plugins
 mkdir -p /run/docker/plugins/
 ls -1 /usr/libexec/docker/*plugin |  \
 while read i;
