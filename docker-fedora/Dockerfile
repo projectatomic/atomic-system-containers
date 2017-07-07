@@ -2,7 +2,7 @@ FROM registry.fedoraproject.org/fedora:rawhide
 
 ENV VERSION=0 RELEASE=1 ARCH=x86_64
 LABEL com.redhat.component="docker" \
-      name="docker" \
+      name="$FGC/docker" \
       version="$VERSION" \
       release="$RELEASE.$DISTTAG" \
       architecture="$ARCH" \
