@@ -13,9 +13,8 @@ LABEL com.redhat.component="docker" \
 
 RUN dnf install --setopt=tsflags=nodocs -y docker container-storage-setup container-selinux cloud-utils-growpart python-docker-py docker-novolume-plugin lvm2 iptables procps-ng xz oci-register-machine \
     && rpm -V docker container-storage-setup container-selinux cloud-utils-growpart python-docker-py docker-novolume-plugin lvm2 iptables procps-ng xz oci-register-machine \
-    && mkdir -p /usr/lib/modules \
-    && dnf clean all \
-    && mkdir -p /exports/hostfs/etc/docker
+    && mkdir -p /usr/lib/modules /exports/hostfs/etc/docker \
+    && dnf clean all
 
 RUN ln -s /usr/libexec/docker/docker-runc-current /usr/bin/docker-runc
 
@@ -27,7 +26,6 @@ COPY set_mounts.sh /
 COPY config.json.template service.template tmpfiles.template /exports/
 COPY daemon.json /exports/hostfs/etc/docker/container-daemon.json
 # https://github.com/rhatdan/oci-umount/issues/2
-RUN cp /etc/oci-umount.conf /exports/hostfs/etc
 # Copy config if available
 RUN (test -e /etc/oci-umount.conf && cp /etc/oci-umount.conf /exports/hostfs/etc) || true
 
