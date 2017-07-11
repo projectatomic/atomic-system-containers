@@ -21,5 +21,7 @@ ADD init.sh /usr/bin
 # system container
 COPY service.template tmpfiles.template config.json.template /exports/
 COPY daemon.json /exports/hostfs/etc/docker/container-daemon.json
+# Copy /etc/oci-umount.conf over if it exists
+RUN (test -e /etc/oci-umount.conf && cp /etc/oci-umount.conf /exports/hostfs/etc) || true
 
 CMD ["/usr/bin/init.sh"]
