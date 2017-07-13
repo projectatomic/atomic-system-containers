@@ -1,3 +1,3 @@
 #!/bin/sh
 
-/usr/local/bin/crio --debug
+exec /usr/bin/crio --debug
