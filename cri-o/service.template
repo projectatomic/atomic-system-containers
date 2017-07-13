@@ -1,0 +1,13 @@
+[Unit]
+Description=crio daemon
+After=network.target
+
+[Service]
+ExecStart=$EXEC_START
+ExecStop=$EXEC_STOP
+Restart=on-failure
+WorkingDirectory=$DESTDIR
+RuntimeDirectory=${NAME}
+
+[Install]
+WantedBy=multi-user.target

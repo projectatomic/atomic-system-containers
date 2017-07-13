@@ -1,0 +1,4 @@
+d    ${RUN_DIRECTORY}/${NAME}               -        -           -       - -
+d    /etc/crio - - - - -
+Z    /etc/crio - - - - -
+d    /opt/cni  - - - - -
