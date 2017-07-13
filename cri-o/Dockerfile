@@ -13,8 +13,8 @@ LABEL com.redhat.component="cri-o" \
 
 COPY tmpfiles.template config.json.template service.template /exports/
 
-COPY build.sh run.sh /usr/bin/
+RUN dnf install --setopt=tsflags=nodocs -y cri-o && dnf clean all
 
-RUN /usr/bin/build.sh
+COPY run.sh /usr/bin/
 
 CMD ["/usr/bin/run.sh"]
