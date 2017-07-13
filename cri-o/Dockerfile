@@ -13,7 +13,10 @@ LABEL com.redhat.component="cri-o" \
 
 COPY tmpfiles.template config.json.template service.template /exports/
 
-RUN dnf install --setopt=tsflags=nodocs -y cri-o && dnf clean all
+RUN dnf install --setopt=tsflags=nodocs -y cri-o && \
+    dnf clean all && \
+    mkdir -p /exports/hostfs/etc/crio && \
+    cp /etc/crio/* /exports/hostfs/etc/crio
 
 COPY run.sh /usr/bin/
 
