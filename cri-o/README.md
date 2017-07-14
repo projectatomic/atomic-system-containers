@@ -1,14 +1,6 @@
 # cri-o
 
-This is the cri-o daemon as a system container. Currently this is only
-in the experimental stage, and cri-o is being build from source inside
-the container, causing the image to be quite large.
-
-This container currently provides crioctl on the host once installed,
-but does not include cni configs. The daemon will run as is, but to
-run pods and containers, you must set up cni plugins as shown in:
-https://github.com/kubernetes-incubator/cri-o/blob/master/tutorial.md
-
+This is the cri-o daemon as a system container.
 
 ## Building the image from source:
 
