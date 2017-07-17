@@ -1,0 +1,12 @@
+[Unit]
+Description=net-snmp
+After=syslog.target network.target
+
+[Service]
+Type=notify
+NotifyAccess=all
+ExecStart=$EXEC_START
+ExecStop=$EXEC_STOP
+Restart=on-failure
+WorkingDirectory=$DESTDIR
+RuntimeDirectory=${NAME}
