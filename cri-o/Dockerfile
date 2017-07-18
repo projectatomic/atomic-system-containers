@@ -18,6 +18,7 @@ RUN dnf install --setopt=tsflags=nodocs -y cri-o cri-o-cni && \
     mkdir -p /exports/hostfs/etc/crio && \
     cp /etc/crio/* /exports/hostfs/etc/crio
 
+COPY set_mounts.sh /
 COPY run.sh /usr/bin/
 
 CMD ["/usr/bin/run.sh"]
