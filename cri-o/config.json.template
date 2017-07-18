@@ -1,162 +1,4 @@
 {
-    "hooks": {},
-    "linux": {
-        "namespaces": [
-            {
-                "type": "mount"
-            }
-        ],
-        "resources": {
-            "devices": [
-                {
-                    "access": "rwm",
-                    "allow": true
-                }
-            ]
-        },
-        "rootfsPropagation": "private",
-        "selinuxProcessLabel": "system_u:system_r:container_runtime_t:s0"
-    },
-    "mounts": [
-        {
-            "destination": "/tmp",
-            "options": [
-                "private",
-                "bind",
-                "rw",
-                "mode=755"
-            ],
-            "source": "/tmp",
-            "type": "bind"
-        },
-        {
-            "destination": "/etc",
-            "options": [
-                "rbind",
-                "rprivate",
-                "rw",
-                "mode=755"
-            ],
-            "source": "/etc",
-            "type": "bind"
-        },
-        {
-            "destination": "/lib/modules",
-            "options": [
-                "rbind",
-                "rprivate",
-                "rw",
-                "mode=755"
-            ],
-            "source": "/lib/modules",
-            "type": "bind"
-        },
-        {
-            "destination": "/root",
-            "options": [
-                "rbind",
-                "rprivate",
-                "rw",
-                "mode=755"
-            ],
-            "source": "/root",
-            "type": "bind"
-        },
-        {
-            "destination": "/home",
-            "options": [
-                "rbind",
-                "rprivate",
-                "rw",
-                "mode=755"
-            ],
-            "source": "/home",
-            "type": "bind"
-        },
-        {
-            "destination": "/mnt",
-            "options": [
-                "rbind",
-                "rw",
-                "rprivate",
-                "mode=755"
-            ],
-            "source": "/mnt",
-            "type": "bind"
-        },
-        {
-            "destination": "/run",
-            "options": [
-                "rshared",
-                "rbind",
-                "rw",
-                "mode=755"
-            ],
-            "source": "${RUN_DIRECTORY}",
-            "type": "bind"
-        },
-        {
-            "destination": "/run/systemd",
-            "options": [
-                "rslave",
-                "bind",
-                "rw",
-                "mode=755"
-            ],
-            "source": "/run/systemd",
-            "type": "bind"
-        },
-        {
-            "destination": "/var/log",
-            "options": [
-                "rbind",
-                "rslave",
-                "rw"
-            ],
-            "source": "/var/log",
-            "type": "bind"
-        },
-        {
-            "destination": "/var/lib",
-            "options": [
-                "rbind",
-                "rshared",
-                "rw"
-            ],
-            "source": "${STATE_DIRECTORY}",
-            "type": "bind"
-        },
-        {
-            "destination": "/dev",
-            "options": [
-                "rprivate",
-                "rbind",
-                "rw",
-                "mode=755"
-            ],
-            "source": "/dev",
-            "type": "bind"
-        },
-        {
-            "destination": "/sys",
-            "options": [
-                "rprivate",
-                "rbind",
-                "rw",
-                "mode=755"
-            ],
-            "source": "/sys",
-            "type": "bind"
-        },
-        {
-            "destination": "/proc",
-            "options": [
-                "private"
-            ],
-            "source": "/proc",
-            "type": "proc"
-        }
-    ],
     "ociVersion": "1.0.0",
     "platform": {
         "arch": "amd64",
@@ -384,5 +226,174 @@
     "root": {
         "path": "rootfs",
         "readonly": true
-    }
+    },
+    "hooks": {},
+    "linux": {
+        "namespaces": [
+            {
+                "type": "mount"
+            }
+        ],
+        "resources": {
+            "devices": [
+                {
+                    "access": "rwm",
+                    "allow": true
+                }
+            ]
+        },
+        "rootfsPropagation": "private",
+        "selinuxProcessLabel": "system_u:system_r:container_runtime_t:s0"
+    },
+    "mounts": [
+        {
+            "destination": "/tmp",
+            "options": [
+                "private",
+                "bind",
+                "rw",
+                "mode=755"
+            ],
+            "source": "/tmp",
+            "type": "bind"
+        },
+        {
+            "destination": "/etc",
+            "options": [
+                "rbind",
+                "rprivate",
+                "rw",
+                "mode=755"
+            ],
+            "source": "/etc",
+            "type": "bind"
+        },
+        {
+            "destination": "/lib/modules",
+            "options": [
+                "rbind",
+                "rprivate",
+                "rw",
+                "mode=755"
+            ],
+            "source": "/lib/modules",
+            "type": "bind"
+        },
+        {
+            "destination": "/root",
+            "options": [
+                "rbind",
+                "rprivate",
+                "rw",
+                "mode=755"
+            ],
+            "source": "/root",
+            "type": "bind"
+        },
+        {
+            "destination": "/home",
+            "options": [
+                "rbind",
+                "rprivate",
+                "rw",
+                "mode=755"
+            ],
+            "source": "/home",
+            "type": "bind"
+        },
+        {
+            "destination": "/mnt",
+            "options": [
+                "rbind",
+                "rw",
+                "rprivate",
+                "mode=755"
+            ],
+            "source": "/mnt",
+            "type": "bind"
+        },
+	{
+	    "type": "bind",
+	    "source": "/usr/share/rhel",
+	    "destination": "/usr/share/rhel",
+	    "options": [
+		"rprivate",
+		"rbind",
+		"ro",
+		"mode=755"
+	    ]
+	},
+	{
+	    "type": "bind",
+	    "source": "${RUN_DIRECTORY}",
+	    "destination": "/run",
+	    "options": [
+		"rshared",
+		"rbind",
+		"rw",
+		"mode=755"
+	    ]
+	},
+        {
+            "destination": "/run/systemd",
+            "options": [
+                "rslave",
+                "bind",
+                "rw",
+                "mode=755"
+            ],
+            "source": "/run/systemd",
+            "type": "bind"
+        },
+        {
+            "destination": "/var/log",
+            "options": [
+                "rbind",
+                "rslave",
+                "rw"
+            ],
+            "source": "/var/log",
+            "type": "bind"
+        },
+        {
+            "destination": "/var/lib",
+            "options": [
+                "rbind",
+                "rshared",
+                "rw"
+            ],
+            "source": "${STATE_DIRECTORY}",
+            "type": "bind"
+        },
+        {
+            "destination": "/dev",
+            "options": [
+                "rprivate",
+                "rbind",
+                "rw",
+                "mode=755"
+            ],
+            "source": "/dev",
+            "type": "bind"
+        },
+        {
+            "destination": "/sys",
+            "options": [
+                "rprivate",
+                "rbind",
+                "rw",
+                "mode=755"
+            ],
+            "source": "/sys",
+            "type": "bind"
+        },
+        {
+            "destination": "/proc",
+            "options": [
+                "private"
+            ],
+            "source": "/proc",
+            "type": "proc"
+        }
+    ]
 }
