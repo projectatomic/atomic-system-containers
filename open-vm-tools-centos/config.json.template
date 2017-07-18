@@ -14,7 +14,7 @@
             "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
             "TERM=xterm",
             "NAME=$NAME",
-	    "SYSTEMD_IGNORE_CHROOT=1"
+	        "SYSTEMD_IGNORE_CHROOT=1"
         ],
         "cwd": "/",
         "capabilities": [
@@ -327,7 +327,7 @@
             ]
         },
         "namespaces": [
-	    {
+	        {
                 "type": "ipc"
             },
             {
