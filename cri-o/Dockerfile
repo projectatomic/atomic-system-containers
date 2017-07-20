@@ -15,8 +15,9 @@ COPY tmpfiles.template config.json.template service.template /exports/
 
 RUN dnf install --setopt=tsflags=nodocs -y cri-o cri-o-cni && \
     dnf clean all && \
-    mkdir -p /exports/hostfs/etc/crio && \
-    cp /etc/crio/* /exports/hostfs/etc/crio
+    mkdir -p /exports/hostfs/etc/crio /exports/hostfs/opt/cni/bin/ && \
+    cp /etc/crio/* /exports/hostfs/etc/crio && \
+    if test -e /opt/cni/bin; then cp -r /opt/cni/bin/* /exports/hostfs/opt/cni/bin/; fi
 
 COPY set_mounts.sh /
 COPY run.sh /usr/bin/
