@@ -355,6 +355,17 @@
             "type": "bind"
         },
         {
+            "destination": "/opt/cni",
+            "options": [
+                "rbind",
+                "rprivate",
+                "ro",
+                "mode=755"
+            ],
+            "source": "/opt/cni",
+            "type": "bind"
+        },
+        {
             "destination": "/dev",
             "options": [
                 "rprivate",
