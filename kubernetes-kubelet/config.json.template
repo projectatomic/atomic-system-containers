@@ -232,14 +232,12 @@
             "source": "proc"
         },
         {
+            "source": "/dev",
             "destination": "/dev",
-            "type": "tmpfs",
-            "source": "tmpfs",
+            "type": "bind",
             "options": [
-                "nosuid",
-                "strictatime",
-                "mode=755",
-                "size=65536k"
+                "rbind",
+                "rslave"
             ]
         },
         {
@@ -265,16 +263,6 @@
                 "nodev",
                 "mode=1777",
                 "size=65536k"
-            ]
-        },
-        {
-            "destination": "/dev/mqueue",
-            "type": "mqueue",
-            "source": "mqueue",
-            "options": [
-                "nosuid",
-                "noexec",
-                "nodev"
             ]
         },
         {
@@ -386,7 +374,7 @@
         "resources": {
             "devices": [
                 {
-                    "allow": false,
+                    "allow": true,
                     "access": "rwm"
                 }
             ]
