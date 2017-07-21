@@ -320,6 +320,16 @@
                 "rbind",
                 "rprivate"
              ]
+          },
+          {
+            "type": "bind",
+            "source": "/run",
+            "destination": "/run",
+            "options": [
+                "rbind",
+                "rw",
+                "mode=755"
+             ]
           }
     ],
     "linux": {
