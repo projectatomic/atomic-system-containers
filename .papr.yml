@@ -1,5 +1,5 @@
 container:
-    image: fedora:25
+  image: registry.fedoraproject.org/fedora:26
 
 packages:
     - python
