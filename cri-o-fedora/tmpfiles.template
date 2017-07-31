@@ -1,3 +1,4 @@
 d    ${RUN_DIRECTORY}/${NAME}               -        -           -       - -
 d    /etc/crio - - - - -
 Z    /etc/crio - - - - -
+d    /usr/share/rhel - - - - -
