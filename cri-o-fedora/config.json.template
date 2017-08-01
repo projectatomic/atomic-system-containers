@@ -334,6 +334,17 @@
 		"mode=755"
 	    ]
 	},
+	{
+	    "type": "bind",
+	    "source": "${RUN_DIRECTORY}/systemd",
+	    "destination": "/run/systemd",
+	    "options": [
+                "rslave",
+                "bind",
+                "rw",
+                "mode=755"
+	    ]
+	},
         {
             "destination": "/var/log",
             "options": [
