@@ -381,7 +381,7 @@
     ],
     "hooks": {},
     "linux": {
-	"rootfsPropagation": "private",
+	"rootfsPropagation": "rslave",
 	"resources": {
 	    "devices": [
 		{
