@@ -396,7 +396,9 @@
         {
             "destination": "/proc",
             "options": [
-                "private"
+                "rbind",
+                "rw",
+                "mode=755"
             ],
             "source": "/proc",
             "type": "proc"
