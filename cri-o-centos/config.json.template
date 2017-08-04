@@ -361,6 +361,16 @@
             "type": "bind"
         },
         {
+            "destination": "/var/lib/origin",
+            "options": [
+                "rshared",
+                "rbind",
+                "rw"
+            ],
+            "source": "${STATE_DIRECTORY}/origin",
+            "type": "bind"
+        },
+        {
             "destination": "/opt/cni",
             "options": [
                 "rbind",
