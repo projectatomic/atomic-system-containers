@@ -237,7 +237,7 @@
                 }
             ]
         },
-        "rootfsPropagation": "private",
+        "rootfsPropagation": "shared",
         "selinuxProcessLabel": "system_u:system_r:container_runtime_t:s0"
     },
     "mounts": [
@@ -361,6 +361,16 @@
             "type": "bind"
         },
         {
+            "destination": "/var/lib/origin",
+            "options": [
+                "rshared",
+                "rbind",
+                "rw"
+            ],
+            "source": "${STATE_DIRECTORY}/origin",
+            "type": "bind"
+        },
+        {
             "destination": "/opt/cni",
             "options": [
                 "rbind",
@@ -396,7 +406,9 @@
         {
             "destination": "/proc",
             "options": [
-                "private"
+                "rbind",
+                "rw",
+                "mode=755"
             ],
             "source": "/proc",
             "type": "proc"

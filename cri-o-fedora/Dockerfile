@@ -11,14 +11,14 @@ LABEL com.redhat.component="cri-o" \
       maintainer="Yu Qi Zhang <jzehrarnyg@gmail.com>" \
       atomic.type="system"
 
-COPY tmpfiles.template config.json.template service.template /exports/
-
-RUN dnf install --setopt=tsflags=nodocs -y iptables cri-o cri-o-cni && \
-    rpm -V iptables cri-o cri-o-cni && \
+RUN dnf install --setopt=tsflags=nodocs -y iptables cri-o cri-o-cni iproute && \
+    rpm -V iptables cri-o cri-o-cni iproute && \
     dnf clean all && \
     mkdir -p /exports/hostfs/etc/crio /exports/hostfs/opt/cni/bin/ && \
     cp /etc/crio/* /exports/hostfs/etc/crio && \
     if test -e /opt/cni/bin; then cp -Lr /opt/cni/bin/* /exports/hostfs/opt/cni/bin/; fi
+
+COPY tmpfiles.template config.json.template service.template /exports/
 
 COPY set_mounts.sh /
 COPY run.sh /usr/bin/
