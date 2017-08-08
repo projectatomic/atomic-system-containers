@@ -22,21 +22,26 @@ import os
 import sys
 import subprocess
 import json
+
 from string import Template
+
 
 class LintRuntimeError(BaseException):
     def __init__(self, error):
         self.error = error
 
-all_files = [
+
+ALL_FILES = [
     "config.json.template",
     "manifest.json",
     "service.template",
     "tmpfiles.template"
 ]
 
-found_any_warning = False
-found_any_error = False
+
+FOUND_ANY_WARNING = False
+FOUND_ANY_ERROR = False
+
 
 (COLOR_BLACK,
  COLOR_RED,
@@ -47,19 +52,22 @@ found_any_error = False
  COLOR_CYAN,
  COLOR_WHITE) = range(30, 38)
 
+
 def colored(line, color):
     if sys.stdout.isatty():
         return "\x1b[1;%dm%s\x1b[0m" % (color, line)
     else:
         return line
 
-def log(location, msg, is_error=False):
-    global found_any_warning, found_any_error
-    found_any_warning = True
-    if is_error:
-        found_any_error = True
 
-    print(colored("%s: %s" %(location, msg), COLOR_RED if is_error else COLOR_YELLOW))
+def log(location, msg, is_error=False):
+    global FOUND_ANY_WARNING, FOUND_ANY_ERROR
+    FOUND_ANY_WARNING = True
+    if is_error:
+        FOUND_ANY_ERROR = True
+
+    print(colored("%s: %s" % (location, msg), COLOR_RED if is_error else COLOR_YELLOW))
+
 
 def check_dockerfile(path, dockerfile):
     with open(dockerfile, 'r') as f:
@@ -72,16 +80,17 @@ def check_dockerfile(path, dockerfile):
         log('Dockerfile', "Found /export.  Did you mean /exports/?")
     if re.search('\nRUN.*(dnf|yum).*install', content):
         if not re.search('tsflags=nodocs', content):
-            log('Dockerfile', "Found 'dnf/yum install' command without '--setopt=tsflags=nodocs'. " \
+            log('Dockerfile', "Found 'dnf/yum install' command without '--setopt=tsflags=nodocs'. "
                 "Please add the flag to reduce image size unless there is need for documentation.")
-    for i in all_files:
+    for i in ALL_FILES:
         if os.path.exists(os.path.join(path, i)):
-            if re.search('ADD .*%s.* /exports/' % i , content):
+            if re.search('ADD .*%s.* /exports/' % i, content):
                 log('Dockerfile', "Found ADD for %s.  Please use COPY" % i)
-            elif re.search('COPY .*%s.* /exports$' % i , content):
+            elif re.search('COPY .*%s.* /exports$' % i, content):
                 log('Dockerfile', "Missing trailing / after exports")
-            elif not re.search('.*[^#].*(ADD|COPY) .*%s.* /exports/' % i , content):
+            elif not re.search('.*[^#].*(ADD|COPY) .*%s.* /exports/' % i, content):
                 log('Dockerfile', "File %s present but not added in the Dockerfile" % i)
+
 
 def check_git(path):
     try:
@@ -91,11 +100,12 @@ def check_git(path):
         log(splits[1] or os.path.split(splits[0])[1], "The project is not using git.  Why?")
         return
 
-    for i in all_files + ["Dockerfile"]:
+    for i in ALL_FILES + ["Dockerfile"]:
         filepath = os.path.join(path, i)
         if os.path.exists(filepath):
-            if  "modified" in subprocess.check_output(["git", "-C", path, "status", i]):
+            if "modified" in subprocess.check_output(["git", "-C", path, "status", i]):
                 log(i, "file has not staged changes")
+
 
 def get_go_os_arch():
     go_command = ["go", "tool", "dist", "list", "-json"]
@@ -156,7 +166,7 @@ def check_config_json(path):
         log(basename, "Invalid arch specified for the OS: `%s`" % spec_arch, is_error=True)
 
     for b in config['mounts']:
-        if not 'source' in b:
+        if 'source' not in b:
             continue
         if b['type'] == "rbind":
             log(basename, "Unknown mount type rbind.  Use bind", is_error=True)
@@ -172,29 +182,31 @@ def check_config_json(path):
     if config['process']['terminal']:
             log(basename, "process/terminal must be false", is_error=True)
 
+
 def check_systemd_unit(path):
     basename = "service.template"
     if not os.path.exists(os.path.join(path, basename)):
         return
     with open(os.path.join(path, basename), 'r') as f:
         content = f.read()
-        match = re.search('ExecStart=(.*)' , content)
+        match = re.search('ExecStart=(.*)', content)
         if not match:
             log(basename, "Could not find ExecStart=")
         elif "EXEC_START" not in match.group(1):
             log(basename, "ExecStart can be automatically generated.  You can use ExecStart=$EXEC_START")
 
-        match = re.search('ExecStop=(.*)' , content)
+        match = re.search('ExecStop=(.*)', content)
         if not match:
             log(basename, "Could not find ExecStop=")
         elif "EXEC_STOP" not in match.group(1):
             log(basename, "ExecStop can be automatically generated.  You can use ExecStop=$EXEC_STOP")
 
-        match = re.search('WorkingDirectory=(.*)' , content)
+        match = re.search('WorkingDirectory=(.*)', content)
         if not match:
             log(basename, "Could not find WorkingDirectory=")
         elif "DESTDIR" not in match.group(1):
             log(basename, "WorkingDirectory should be the container checkout directory.  WorkingDirectory=$DESTDIR")
+
 
 def check_manifest_json(path):
     basename = "manifest.json"
@@ -204,33 +216,33 @@ def check_manifest_json(path):
         content = f.read()
 
     values = {
-        "DESTDIR" : "1",
-        "NAME" : "1",
-        "EXEC_START" : "1",
-        "EXEC_STOP" : "1",
-        "HOST_UID" : "1",
-        "HOST_GID" : "1",
-        "RUN_DIRECTORY" : "1",
-        "STATE_DIRECTORY" : "1"
+        "DESTDIR": "1",
+        "NAME": "1",
+        "EXEC_START": "1",
+        "EXEC_STOP": "1",
+        "HOST_UID": "1",
+        "HOST_GID": "1",
+        "RUN_DIRECTORY": "1",
+        "STATE_DIRECTORY": "1"
     }
     config = json.loads(content)
     if 'defaultValues' in config:
         for i in config['defaultValues'].keys():
             values[i] = "1"
     all_missing = {}
-    for i in all_files:
+    for i in ALL_FILES:
         if i.endswith(".template") and os.path.exists(os.path.join(path, i)):
             with open(os.path.join(path, i), 'r') as f:
                 data = f.read()
                 template = Template(data)
-                result = template.safe_substitute(values)
                 for m in {"".join(x) for x in template.pattern.findall(data) if "".join(x) not in values}:
                     all_missing[m] = True
     for i in all_missing:
         log(basename, "Missing default value for %s" % i)
 
+
 def check(path):
-    global found_any_warning
+    global FOUND_ANY_WARNING
     if not os.path.exists(path):
         raise LintRuntimeError("The path %s does not exist" % path)
     dockerfilepath = os.path.join(path, "Dockerfile")
@@ -241,19 +253,20 @@ def check(path):
     check_config_json(path)
     check_systemd_unit(path)
     check_manifest_json(path)
-    if not found_any_warning:
+    if not FOUND_ANY_WARNING:
         print(colored("All Good!", COLOR_GREEN))
+
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print("Usage %s [SYSTEM-CONTAINER-BUILD-PATH]" % sys.argv[0])
-        sys.exit(1)
+        raise SystemExit(1)
 
     try:
         check(sys.argv[1])
     except LintRuntimeError as e:
         print(e.error)
-        sys.exit(1)
+        raise SystemExit(1)
 
-    if found_any_error:
-        sys.exit(1)
+    if FOUND_ANY_ERROR:
+        raise SystemExit(1)
