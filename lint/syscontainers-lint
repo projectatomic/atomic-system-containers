@@ -118,7 +118,7 @@ def get_go_os_arch():
             tmp[arch] = True
             os_arch[os] = tmp
         return os_arch
-    except subprocess.CalledProcessError:
+    except (subprocess.CalledProcessError, OSError):
         # Back up for older go versions
         print(colored("Unable to find arch using '{}'".format(" ".join(go_command)), COLOR_YELLOW))
         go_os = ""
