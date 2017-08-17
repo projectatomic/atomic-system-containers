@@ -1,0 +1,6 @@
+#!/bin/bash
+
+IMAGE=net-snmp-commands
+NAME=${IMAGE}-$(uuidgen)
+
+atomic install --system --system-package=no --name=${NAME} --storage ostree --set COMMAND=${1} --set ARGS="${*:2}" ${IMAGE}:latest
