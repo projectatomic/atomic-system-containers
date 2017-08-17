@@ -4,7 +4,7 @@
     OPTIONS="-Lsd"
     . /etc/sysconfig/snmptrapd
     unset NOTIFY_SOCKET
-    /usr/sbin/snmptrapd $OPTIONS -f
+    exec /usr/sbin/snmptrapd $OPTIONS -f
 ) &
 
 OPTIONS="-LS0-6d"
