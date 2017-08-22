@@ -39,7 +39,8 @@
 	"ETCD_DEBUG" : "false",
 	"ETCD_LOG_PACKAGE_LEVELS" : "",
 	"ETCD_STRICT_RECONFIG_CHECK" : "false",
-	"ETCD_ENABLE_PPROF" : "false"
+	"ETCD_ENABLE_PPROF" : "false",
+	"ADDTL_MOUNTS": ""
     },
     "renameFiles" : {
         "/etc/etcd/etcd.conf" : "$CONF_DIRECTORY/$NAME/etcd.conf",
