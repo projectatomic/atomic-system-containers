@@ -106,8 +106,17 @@ def check_git(path):
             if "modified" in subprocess.check_output(["git", "-C", path, "status", i]):
                 log(i, "file has not staged changes")
 
+def preprocess_from_manifest(path, content):
+    with open(os.path.join(path, 'manifest.json'), 'r') as m:
+        manifest = json.load(m)
+        if 'defaultValues' not in manifest:
+            return content
+        values = manifest['defaultValues']
+        template = Template(content)
+        return template.safe_substitute(values)
 
 def check_config_json(path):
+    preprocess = False
     if os.path.exists(os.path.join(path, "config.json")):
         basename = "config.json"
         template = False
@@ -117,9 +126,13 @@ def check_config_json(path):
     else:
         basename = "config.json.template"
         template = True
+        if os.path.exists(os.path.join(path, "manifest.json")):
+            preprocess = True
 
     with open(os.path.join(path, basename), 'r') as f:
         content = f.read()
+        if preprocess:
+            content = preprocess_from_manifest(path, content)
 
     config = json.loads(content)
 
@@ -146,7 +159,7 @@ def check_systemd_unit(path):
     if not os.path.exists(os.path.join(path, basename)):
         return
     with open(os.path.join(path, basename), 'r') as f:
-        content = f.read()
+        content = preprocess_from_manifest(path, f.read())
         match = re.search('ExecStart=(.*)', content)
         if not match:
             log(basename, "Could not find ExecStart=")
