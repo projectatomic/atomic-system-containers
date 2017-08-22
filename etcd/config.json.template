@@ -216,6 +216,7 @@
                                  "rprivate"
                          ]
                  }
+                 $ADDTL_MOUNTS
 	],
 	"linux": {
 		"resources": {
