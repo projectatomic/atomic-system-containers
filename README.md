@@ -27,7 +27,7 @@ System containers use different technologies:
  instead we use the [Skopeo](https://github.com/projectatomic/skopeo) tool to pull images from a container registry.
  * When you *atomic install* a system container the tool will look for a systemd unit file template in /exports directory and will create a systemd unit file to run the container on the host.
  * The unit files uses [runc](https://github.com/opencontainers/runc) to create and run the containers.
- * [systemd](https://github.com/systemd/systemd) manages the lifestyle of the container.
+ * [systemd](https://github.com/systemd/systemd) manages the lifecycle of the container.
 
 To use system containers you must have Atomic CLI version 1.12 or later and the
 ostree utility installed.
