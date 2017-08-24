@@ -11,7 +11,7 @@ This is net-snmp as a system container which includes:
 ```
 # git clone https://github.com/projectatomic/atomic-system-containers
 # cd atomic-system-containers/net-snmp
-# docker build -t net-netsnmp .
+# docker build -t net-snmp .
 ```
 
 ## Running the system container, with the atomic CLI:
