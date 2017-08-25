@@ -314,17 +314,6 @@
         },
 	{
 	    "type": "bind",
-	    "source": "/usr/share/rhel",
-	    "destination": "/usr/share/rhel",
-	    "options": [
-		"rprivate",
-		"rbind",
-		"ro",
-		"mode=755"
-	    ]
-	},
-	{
-	    "type": "bind",
 	    "source": "${RUN_DIRECTORY}",
 	    "destination": "/run",
 	    "options": [
