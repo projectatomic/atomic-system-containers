@@ -8,6 +8,7 @@
         "args": [
             "/usr/bin/run.sh"
         ],
+        "selinuxLabel": "system_u:system_r:container_runtime_t:s0",
         "capabilities": {
             "ambient": [
                 "CAP_CHOWN",
@@ -242,8 +243,7 @@
                 }
             ]
         },
-        "rootfsPropagation": "shared",
-        "selinuxProcessLabel": "system_u:system_r:container_runtime_t:s0"
+        "rootfsPropagation": "shared"
     },
     "mounts": [
         {
