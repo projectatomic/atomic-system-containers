@@ -205,6 +205,7 @@
                 "CAP_BLOCK_SUSPEND"
             ]
         },
+        "selinuxLabel": "system_u:system_r:container_runtime_t:s0",
         "cwd": "/",
         "env": [
             "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/go/bin:/root/go/bin",
@@ -237,8 +238,7 @@
                 }
             ]
         },
-        "rootfsPropagation": "shared",
-        "selinuxProcessLabel": "system_u:system_r:container_runtime_t:s0"
+        "rootfsPropagation": "shared"
     },
     "mounts": [
         {
