@@ -1,14 +1,19 @@
 container:
   image: registry.fedoraproject.org/fedora:26
 
-packages:
-    - python
-    - findutils
-    - git
-    - golang-bin
-    - yajl
+# temp workaround for https://bugzilla.redhat.com/show_bug.cgi?id=1483553
+#packages:
+#    - python
+#    - findutils
+#    - git
+#    - golang-bin
+#    - yajl
 
 tests:
+    # temp workaround for https://bugzilla.redhat.com/show_bug.cgi?id=1483553
+    - if (dnf upgrade -y || :) |& grep -q -e BDB1539; then
+      rpm --rebuilddb; dnf upgrade -y;
+      fi; dnf install -y python findutils git golang-bin yajl
     - ./test.sh
 
 branches:
