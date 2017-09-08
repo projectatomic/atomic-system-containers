@@ -12,8 +12,8 @@ LABEL com.redhat.component="cri-o" \
       atomic.type="system"
 
 RUN yum-config-manager --nogpgcheck --add-repo https://cbs.centos.org/repos/virt7-docker-common-candidate/x86_64/os/ && \
-    yum install --nogpgcheck --setopt=tsflags=nodocs -y iptables cri-o iproute && \
-    rpm -V iptables cri-o iproute && \
+    yum install --nogpgcheck --setopt=tsflags=nodocs -y iptables cri-o iproute runc && \
+    rpm -V iptables cri-o iproute runc && \
     yum clean all && \
     mkdir -p /exports/hostfs/etc/crio /exports/hostfs/opt/cni/bin/ && \
     cp /etc/crio/* /exports/hostfs/etc/crio && \

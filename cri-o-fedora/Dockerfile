@@ -11,8 +11,8 @@ LABEL com.redhat.component="cri-o" \
       maintainer="Yu Qi Zhang <jzehrarnyg@gmail.com>" \
       atomic.type="system"
 
-RUN dnf install --setopt=tsflags=nodocs -y iptables cri-o iproute && \
-    rpm -V iptables cri-o iproute && \
+RUN dnf install --setopt=tsflags=nodocs -y iptables cri-o iproute runc && \
+    rpm -V iptables cri-o iproute runc && \
     dnf clean all && \
     mkdir -p /exports/hostfs/etc/crio /exports/hostfs/opt/cni/bin/ && \
     cp /etc/crio/* /exports/hostfs/etc/crio && \
