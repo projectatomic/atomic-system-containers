@@ -348,17 +348,27 @@
             "destination": "/var/lib",
             "options": [
                 "rbind",
-                "rshared",
+                "rprivate",
                 "rw"
             ],
             "source": "${STATE_DIRECTORY}",
             "type": "bind"
         },
         {
+            "destination": "/var/lib/containers",
+            "options": [
+                "rbind",
+                "rshared",
+                "rw"
+            ],
+            "source": "${STATE_DIRECTORY}/containers",
+            "type": "bind"
+        },
+        {
             "destination": "/var/lib/origin",
             "options": [
                 "rshared",
-                "rbind",
+                "bind",
                 "rw"
             ],
             "source": "${STATE_DIRECTORY}/origin",
