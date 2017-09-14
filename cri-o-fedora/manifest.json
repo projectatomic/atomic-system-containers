@@ -1,0 +1,8 @@
+{
+    "version": "1.0",
+    "defaultValues": {
+        "OPT_CNI" : "/opt/cni",
+        "VAR_LIB_CONTAINERS" : "/var/lib/containers",
+        "VAR_LIB_ORIGIN" : "/var/lib/origin"
+    }
+}
