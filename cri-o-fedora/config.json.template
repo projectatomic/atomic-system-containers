@@ -243,7 +243,7 @@
                 }
             ]
         },
-        "rootfsPropagation": "shared"
+        "rootfsPropagation": "private"
     },
     "mounts": [
         {
@@ -361,7 +361,7 @@
                 "rshared",
                 "rw"
             ],
-            "source": "${STATE_DIRECTORY}/containers",
+            "source": "${VAR_LIB_CONTAINERS}",
             "type": "bind"
         },
         {
@@ -371,7 +371,7 @@
                 "bind",
                 "rw"
             ],
-            "source": "${STATE_DIRECTORY}/origin",
+            "source": "${VAR_LIB_ORIGIN}",
             "type": "bind"
         },
         {
@@ -382,7 +382,7 @@
                 "ro",
                 "mode=755"
             ],
-            "source": "/opt/cni",
+            "source": "${OPT_CNI}",
             "type": "bind"
         },
         {
