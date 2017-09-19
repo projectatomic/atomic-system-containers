@@ -11,8 +11,8 @@ container:
 
 tests:
     # temp workaround for https://bugzilla.redhat.com/show_bug.cgi?id=1483553
-    - if (dnf upgrade -y || :) |& grep -q -e BDB1539; then
-      rpm --rebuilddb; dnf upgrade -y;
+    - if (dnf distro-sync -y || :) |& grep -q -e BDB1539; then
+      rpm --rebuilddb; dnf distro-sync;
       fi; dnf install -y python findutils git golang-bin yajl
     - ./test.sh
 
