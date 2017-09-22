@@ -1,6 +1,6 @@
 #!/bin/sh
 
-findmnt /var/lib > /dev/null || mount --bind --make-shared /var/lib /var/lib
+findmnt /var/lib > /dev/null || mount --rbind --make-shared /var/lib /var/lib
 findmnt /var/lib/containers > /dev/null || mount --bind --make-shared /var/lib/containers /var/lib/containers
 findmnt /var/lib/origin > /dev/null || mount --bind --make-shared /var/lib/origin /var/lib/origin
 mount --make-shared /run
