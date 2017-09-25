@@ -2,6 +2,7 @@
 
 source /etc/kubernetes/kubelet
 source /etc/kubernetes/config
+unset KUBELET_API_SERVER
 
 TEMP_KUBELET_ARGS='--cgroup-driver=systemd --cgroups-per-qos=false --enforce-node-allocatable='
 
