@@ -350,13 +350,13 @@
             "type": "bind"
         },
         {
-            "destination": "/var/lib/containers",
+            "destination": "/var/lib/containers/storage",
             "options": [
                 "rbind",
                 "rshared",
                 "rw"
             ],
-            "source": "${VAR_LIB_CONTAINERS}",
+            "source": "${VAR_LIB_CONTAINERS_STORAGE}",
             "type": "bind"
         },
         {
