@@ -14,7 +14,7 @@ LABEL com.redhat.component="cri-o" \
 RUN dnf install --setopt=tsflags=nodocs -y iptables cri-o iproute runc && \
     rpm -V iptables cri-o iproute runc && \
     dnf clean all && \
-    mkdir -p /exports/hostfs/etc/crio /exports/hostfs/opt/cni/bin/ && \
+    mkdir -p /exports/hostfs/etc/crio /exports/hostfs/opt/cni/bin/ /exports/hostfs/var/lib/containers/storage/ && \
     cp /etc/crio/* /exports/hostfs/etc/crio && \
     if test -e /opt/cni/bin; then cp -Lr /opt/cni/bin/* /exports/hostfs/opt/cni/bin/; fi
 
