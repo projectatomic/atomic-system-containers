@@ -361,7 +361,7 @@
                 "rshared",
                 "rw"
             ],
-            "source": "${VAR_LIB_CONTAINERS}",
+            "source": "${VAR_LIB_CONTAINERS_STORAGE}",
             "type": "bind"
         },
         {
