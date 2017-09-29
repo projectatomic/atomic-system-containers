@@ -18,6 +18,8 @@ RUN dnf install --setopt=tsflags=nodocs -y iptables cri-o iproute runc && \
     cp /etc/crio/* /exports/hostfs/etc/crio && \
     if test -e /opt/cni/bin; then cp -Lr /opt/cni/bin/* /exports/hostfs/opt/cni/bin/; fi
 
+RUN sed -i '/storage_option =/s/.*/&\n"overlay.override_kernel_check=1",/' /exports/hostfs/etc/crio/crio.conf
+
 COPY manifest.json tmpfiles.template config.json.template service.template /exports/
 
 COPY set_mounts.sh /
