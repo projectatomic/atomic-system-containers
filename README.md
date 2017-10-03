@@ -34,4 +34,7 @@ ostree utility installed.
 
 For more information on system containers see:
 
-http://www.projectatomic.io/blog/2016/09/intro-to-system-containers
+- [Basic usage](USAGE.md)
+- http://www.projectatomic.io/blog/2016/09/intro-to-system-containers
+- http://www.projectatomic.io/blog/2017/06/creating-system-containers/
+- http://www.projectatomic.io/blog/2017/09/running-kubernetes-on-fedora-atomic-26/
