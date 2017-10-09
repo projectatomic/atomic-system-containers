@@ -106,6 +106,7 @@ def check_git(path):
             if "modified" in subprocess.check_output(["git", "-C", path, "status", i]):
                 log(i, "file has not staged changes")
 
+
 def preprocess_from_manifest(path, content):
     manifest_path = os.path.join(path, 'manifest.json')
     if not os.path.exists(manifest_path):
@@ -117,6 +118,7 @@ def preprocess_from_manifest(path, content):
         values = manifest['defaultValues']
         template = Template(content)
         return template.safe_substitute(values)
+
 
 def check_config_json(path):
     preprocess = False
@@ -241,7 +243,7 @@ if __name__ == '__main__':
         with open(sys.argv[2], 'r') as f:
             content = f.read()
             print(preprocess_from_manifest(sys.argv[1], content))
-            sys.exit(0)
+            raise SystemExit(0)
 
     try:
         check(sys.argv[1])
