@@ -1,5 +1,4 @@
 FROM kubernetes-master:rawhide
-MAINTAINER "Jason Brooks" <jbrooks@redhat.com>
 
 ENV container=docker
 
@@ -9,7 +8,8 @@ LABEL bzcomponent="$NAME" \
         version="$VERSION" \
         release="$RELEASE.$DISTTAG" \
         architecture="$ARCH" \
-        atomic.type='system'
+        atomic.type='system' \
+        maintainer="Jason Brooks <jbrooks@redhat.com>"
 
 COPY launch.sh /usr/bin/kube-apiserver-docker.sh
 
