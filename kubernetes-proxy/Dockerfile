@@ -1,6 +1,4 @@
 FROM kubernetes-node:rawhide
-MAINTAINER "Jason Brooks" <jbrooks@redhat.com>
-
 ENV container=docker
 
 ENV NAME=kubernetes-proxy VERSION=0 RELEASE=8 ARCH=x86_64
@@ -9,9 +7,10 @@ LABEL bzcomponent="$NAME" \
         version="$VERSION" \
         release="$RELEASE.$DISTTAG" \
         architecture="$ARCH" \
-        atomic.type='system'
+        atomic.type='system' \
+        maintainer="Jason Brooks <jbrooks@redhat.com>"
 
-RUN dnf install -y iptables conntrack-tools && dnf clean all
+RUN dnf install -y --setopt=tsflags=nodocs iptables conntrack-tools && dnf clean all
 
 LABEL RUN /usr/bin/docker run -d --privileged --net=host 
 
