@@ -9,7 +9,7 @@ LABEL summary="The oVirt Guest Agent" \
 
 ADD logger_conf /root/logger_conf
 
-RUN dnf -y install ovirt-guest-agent-common
+RUN dnf -y install --setopt=tsflags=nodocs ovirt-guest-agent-common
 RUN cat /root/logger_conf >> /etc/ovirt-guest-agent.conf && rm /root/logger_conf
 
 COPY ovirt-container-shutdown.sh prep.sh /usr/local/bin/
