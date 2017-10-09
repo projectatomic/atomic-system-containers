@@ -9,7 +9,7 @@ LABEL summary="The oVirt Guest Agent" \
 
 ADD logger_conf /root/logger_conf
 
-RUN yum install epel-release -y; yum -y install ovirt-guest-agent-common
+RUN yum install epel-release -y --setopt=tsflags=nodocs; yum -y --setopt=tsflags=nodocs install ovirt-guest-agent-common
 RUN cat /root/logger_conf >> /etc/ovirt-guest-agent.conf && rm /root/logger_conf
 
 COPY ovirt-container-shutdown.sh prep.sh /usr/local/bin/
