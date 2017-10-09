@@ -1,6 +1,4 @@
 FROM kubernetes-master:rawhide
-MAINTAINER "Jason Brooks" <jbrooks@redhat.com>
-
 ENV container=docker
 
 ENV NAME=kubernetes-scheduler VERSION=0.1 RELEASE=8 ARCH=x86_64
@@ -9,7 +7,8 @@ LABEL bzcomponent="$NAME" \
         version="$VERSION" \
         release="$RELEASE.$DISTTAG" \
         architecture="$ARCH" \
-        atomic.type='system'
+        atomic.type='system' \
+        maintainer="Jason Brooks <jbrooks@redhat.com>"
 
 COPY launch.sh /usr/bin/kube-scheduler-docker.sh
 
