@@ -163,6 +163,7 @@ def check_config_json(path):
 def check_systemd_unit(path):
     basename = "service.template"
     if not os.path.exists(os.path.join(path, basename)):
+        log(basename, "Missing service.template file. A default will be used.")
         return
     with open(os.path.join(path, basename), 'r') as f:
         content = preprocess_from_manifest(path, f.read())
