@@ -125,8 +125,11 @@ def check_config_json(path):
     if os.path.exists(os.path.join(path, "config.json")):
         basename = "config.json"
         template = False
-        log("config.json", "file found, it does not support template substitutions.  Use config.json.template instead.")
+        log("config.json", ("file found, it does not support template "
+                            "substitutions. Use config.json.template instead."),
+            True)
     elif not os.path.exists(os.path.join(path, "config.json.template")):
+        log("config.json.template", "Missing config.json.template file. A default will be used.")
         return
     else:
         basename = "config.json.template"
