@@ -143,7 +143,7 @@ def check_config_json(path):
 
     config = json.loads(content)
 
-    for b in config['mounts']:
+    for b in config.get('mounts', {}):
         if 'source' not in b:
             continue
         if b['type'] == "rbind":
@@ -153,14 +153,14 @@ def check_config_json(path):
         if template and b['source'].startswith("/run"):
             log(basename, "found mount point /run.  Use ${RUN_DIRECTORY} instead")
 
-    if config['root']['path'] != 'rootfs':
-            log(basename, "Path must be 'rootfs'")
-    if not config['root']['readonly']:
-            log(basename, "Readonly must be true", is_error=True)
-    if config['process']['terminal']:
-            log(basename, "process/terminal must be false", is_error=True)
-    if 'selinuxProcessLabel' in config['linux']:
-            log(basename, "linux/selinuxProcessLabel not valid.  Use process/selinuxLabel", is_error=True)
+    if config.get('root', {}).get('path', '') != 'rootfs':
+        log(basename, "root/path must be 'rootfs'")
+    if not config.get('root', {}).get('readonly', False):
+        log(basename, "root/readonly must be true", is_error=True)
+    if config.get('process', {}).get('terminal', True):
+        log(basename, "process/terminal must be false", is_error=True)
+    if 'selinuxProcessLabel' in config.get('linux', {}):
+        log(basename, "linux/selinuxProcessLabel not valid.  Use process/selinuxLabel", is_error=True)
 
 
 def check_systemd_unit(path):
