@@ -188,6 +188,7 @@ def check_systemd_unit(path):
 def check_manifest_json(path):
     basename = "manifest.json"
     if not os.path.exists(os.path.join(path, basename)):
+        log(basename, "Missing manifest.json file. A default will be used.")
         return
     with open(os.path.join(path, basename), 'r') as f:
         content = f.read()
