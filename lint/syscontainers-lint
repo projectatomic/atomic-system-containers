@@ -1,4 +1,4 @@
-#!/usr/bin/python -Es
+#!/usr/bin/env python
 # Copyright (C) 2016 Red Hat
 # AUTHOR: Giuseppe Scrivano <gscrivan@redhat.com>
 
@@ -26,11 +26,21 @@ import json
 from string import Template
 
 
-class LintRuntimeError(BaseException):
+class LintRuntimeError(Exception):
+    """
+    Lint specific error which causes the end of lint logic.
+    """
     def __init__(self, error):
+        """
+        Creates a new instance of the LintRuntimeError.
+
+        :param error: Error message
+        :type error: str
+        """
         self.error = error
 
 
+#: All files which will be checked by the linter
 ALL_FILES = [
     "config.json.template",
     "manifest.json",
@@ -39,7 +49,9 @@ ALL_FILES = [
 ]
 
 
+#: If any warning was found during linting
 FOUND_ANY_WARNING = False
+#: If any error was found during linting
 FOUND_ANY_ERROR = False
 
 
@@ -94,7 +106,7 @@ def check_dockerfile(path, dockerfile):
 
 def check_git(path):
     try:
-        subprocess.check_output(["git", "-C", path, "status"])
+        subprocess.check_output(["git", "-C", path, "status"]).decode('utf-8')
     except (OSError, subprocess.CalledProcessError):
         splits = os.path.split(path)
         log(splits[1] or os.path.split(splits[0])[1], "The project is not using git.  Why?")
@@ -103,7 +115,8 @@ def check_git(path):
     for i in ALL_FILES + ["Dockerfile"]:
         filepath = os.path.join(path, i)
         if os.path.exists(filepath):
-            if "modified" in subprocess.check_output(["git", "-C", path, "status", i]):
+            if "modified" in subprocess.check_output([
+                    "git", "-C", path, "status", i]).decode('utf-8'):
                 log(i, "file has not staged changes")
 
 
