@@ -26,7 +26,7 @@ and then removed.
 
 ### Example
 ```
-atomic.type="once"
+atomic.run="once"
 ```
 
 
