@@ -16,7 +16,7 @@ RUN dnf install --setopt=tsflags=nodocs -y iptables cri-o iproute runc && \
     dnf clean all && \
     mkdir -p /exports/hostfs/etc/crio /exports/hostfs/opt/cni/bin/ /exports/hostfs/var/lib/containers/storage/ && \
     cp /etc/crio/* /exports/hostfs/etc/crio && \
-    if test -e /opt/cni/bin; then cp -Lr /opt/cni/bin/* /exports/hostfs/opt/cni/bin/; fi
+    if test -e /usr/libexec/cni; then cp -Lr /usr/libexec/cni/* /exports/hostfs/opt/cni/bin/; fi
 
 RUN sed -i '/storage_option =/s/.*/&\n"overlay.override_kernel_check=1",/' /exports/hostfs/etc/crio/crio.conf
 
