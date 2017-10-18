@@ -395,7 +395,6 @@
             }
         ],
         "devices": null,
-        "apparmorProfile": "",
-        "selinuxProcessLabel": ""
+        "apparmorProfile": ""
     }
 }
