@@ -375,6 +375,16 @@
             "type": "bind"
         },
         {
+            "destination": "/var/lib/kubelet",
+            "options": [
+                "rshared",
+                "bind",
+                "rw"
+            ],
+            "source": "${VAR_LIB_KUBE}",
+            "type": "bind"
+        },
+        {
             "destination": "/opt/cni",
             "options": [
                 "rbind",
