@@ -10,6 +10,10 @@ ExecStop=$EXEC_STOP
 Restart=on-failure
 WorkingDirectory=$DESTDIR
 RuntimeDirectory=${NAME}
+TasksMax=infinity
+LimitNOFILE=1048576
+LimitNPROC=1048576
+LimitCORE=infinity
 
 [Install]
 WantedBy=multi-user.target
