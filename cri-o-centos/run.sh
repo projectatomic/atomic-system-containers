@@ -5,4 +5,4 @@ PID=$$
 LABEL=`tr -d '\000' < /proc/$PID/attr/current`
 printf %s $LABEL > /proc/self/attr/exec
 
-exec /usr/bin/crio --log-level=debug
+exec /usr/bin/crio --log-level=$LOG_LEVEL
