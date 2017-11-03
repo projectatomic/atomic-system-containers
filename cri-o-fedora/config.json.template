@@ -215,6 +215,7 @@
         "env": [
             "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/go/bin:/root/go/bin",
             "TERM=xterm",
+            "LOG_LEVEL=$LOG_LEVEL",
             "NAME=$NAME"
         ],
         "noNewPrivileges": false,
