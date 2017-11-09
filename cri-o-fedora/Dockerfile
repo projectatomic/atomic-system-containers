@@ -11,6 +11,8 @@ LABEL com.redhat.component="cri-o" \
       maintainer="Yu Qi Zhang <jzehrarnyg@gmail.com>" \
       atomic.type="system"
 
+COPY README.md /
+
 RUN dnf install --setopt=tsflags=nodocs -y iptables cri-o iproute runc && \
     rpm -V iptables cri-o iproute runc && \
     dnf clean all && \
