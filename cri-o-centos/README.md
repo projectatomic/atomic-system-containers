@@ -52,3 +52,6 @@ Removing the container
 # atomic uninstall crio
 ```
 
+## Binary version
+
+You can find the image automatically built as: registry.centos.org/projectatomic/cri-o:latest
