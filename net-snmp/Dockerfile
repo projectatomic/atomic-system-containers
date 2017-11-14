@@ -5,7 +5,6 @@ LABEL maintainer="Giuseppe Scrivano <gscrivan@redhat.com>" \
       name="net-snmp" \
       version="0.1" \
       atomic.type="system" \
-      architecture="x86_64"
 
 RUN dnf -y install --setopt=tsflags=nodocs net-snmp net-snmp-utils net-snmp-agent-libs && \
     rpm -V net-snmp net-snmp-utils net-snmp-agent-libs && \
