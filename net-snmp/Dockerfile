@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora:26
+FROM registry.fedoraproject.org/fedora:27
 
 
 LABEL maintainer="Giuseppe Scrivano <gscrivan@redhat.com>" \
