@@ -5,6 +5,9 @@ LABEL maintainer="Giuseppe Scrivano <gscrivan@redhat.com>" \
       name="net-snmp" \
       version="0.1" \
       atomic.type="system" \
+      description="SNMP (Simple Network Management Protocol) is a protocol used \
+for network management. The net-snmp container provides an easy means for \
+monitoring Atomic Host."
 
 RUN dnf -y install --setopt=tsflags=nodocs net-snmp net-snmp-utils net-snmp-agent-libs && \
     rpm -V net-snmp net-snmp-utils net-snmp-agent-libs && \
