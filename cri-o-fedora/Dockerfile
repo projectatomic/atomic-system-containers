@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora:26
+FROM registry.fedoraproject.org/fedora:27
 
 ENV VERSION=0 RELEASE=1 ARCH=x86_64
 LABEL com.redhat.component="cri-o" \
@@ -13,7 +13,7 @@ LABEL com.redhat.component="cri-o" \
 
 COPY README.md /
 
-RUN dnf install --setopt=tsflags=nodocs -y iptables cri-o iproute runc && \
+RUN dnf install --enablerepo=updates-testing --setopt=tsflags=nodocs -y iptables cri-o iproute runc && \
     rpm -V iptables cri-o iproute runc && \
     dnf clean all && \
     mkdir -p /exports/hostfs/etc/crio /exports/hostfs/opt/cni/bin/ /exports/hostfs/var/lib/containers/storage/ && \
