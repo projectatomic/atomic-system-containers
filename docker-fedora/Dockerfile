@@ -11,8 +11,8 @@ LABEL com.redhat.component="docker" \
       maintainer="Giuseppe Scrivano <gscrivan@redhat.com>" \
       atomic.type="system"
 
-RUN dnf install --setopt=tsflags=nodocs -y docker container-storage-setup container-selinux cloud-utils-growpart python-docker-py docker-novolume-plugin lvm2 iptables procps-ng xz oci-register-machine \
-    && rpm -V docker container-storage-setup container-selinux cloud-utils-growpart python-docker-py docker-novolume-plugin lvm2 iptables procps-ng xz oci-register-machine \
+RUN dnf install --setopt=tsflags=nodocs -y docker container-storage-setup container-selinux cloud-utils-growpart docker-novolume-plugin lvm2 iptables procps-ng xz oci-register-machine \
+    && rpm -V docker container-storage-setup container-selinux cloud-utils-growpart docker-novolume-plugin lvm2 iptables procps-ng xz oci-register-machine \
     && mkdir -p /usr/lib/modules /exports/hostfs/etc/docker \
     && dnf clean all
 
