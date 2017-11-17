@@ -356,7 +356,7 @@
             "type": "bind"
         },
         {
-            "destination": "/var/lib/containers",
+            "destination": "/var/lib/containers/storage",
             "options": [
                 "rbind",
                 "rshared",
