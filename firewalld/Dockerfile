@@ -30,6 +30,13 @@ RUN dnf install --setopt=tsflags=nodocs -y firewalld && \
     # We need /var/log/firewalld for firewalld to write messages
     touch /exports/hostfs/var/log/firewalld
 
+# Copy the associated binaries to the corresponding location, because firewalld going to use them
+RUN mkdir -p /exports/hostfs/sbin && \
+    mkdir -p /exports/hostfs/usr/sbin && \
+    mkdir -p /exports/hostfs/usr/lib/firewalld && \
+    cp -r /usr/lib/firewalld/* /exports/hostfs/usr/lib/firewalld && \
+    cp /usr/sbin/ebtables /exports/hostfs/usr/sbin/ && \
+    cp /usr/sbin/ipset /exports/hostfs/sbin/
 
 COPY run.sh /usr/bin/
 
@@ -37,4 +44,3 @@ COPY run.sh /usr/bin/
 COPY tmpfiles.template service.template manifest.json config.json.template /exports/
 
 CMD ["/usr/bin/run.sh"]
-
