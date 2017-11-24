@@ -1,0 +1,19 @@
+[Unit]
+Description=firewalld - dynamic firewall daemon
+Before=network-pre.target
+Wants=network-pre.target
+After=dbus.service
+Requires=dbus.service
+Conflicts=iptables.service ip6tables.service ebtables.service ipset.service
+
+[Service]
+Type=notify
+EnvironmentFile=-/etc/sysconfig/firewalld
+ExecStart=$EXEC_START
+ExecStop=$EXEC_STOP
+Restart=on-failure
+WorkingDirectory=$DESTDIR
+RuntimeDirectory=${NAME}
+
+[Install]
+WantedBy=multi-user.target
