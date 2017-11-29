@@ -13,7 +13,7 @@ LABEL com.redhat.component="cri-o" \
 
 COPY README.md /
 
-RUN dnf install --enablerepo=updates-testing --setopt=tsflags=nodocs -y iptables cri-o iproute runc && \
+RUN dnf install --enablerepo=updates-testing --setopt=tsflags=nodocs -y iptables cri-o socat iproute runc && \
     rpm -V iptables cri-o iproute runc && \
     dnf clean all && \
     mkdir -p /exports/hostfs/etc/crio /exports/hostfs/opt/cni/bin/ /exports/hostfs/var/lib/containers/storage/ && \
