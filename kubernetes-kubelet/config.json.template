@@ -353,7 +353,7 @@
             "destination": "/var/lib/kubelet",
             "options": [
                 "rbind",
-                "rslave",
+                "rshared",
                 "rw",
                 "mode=755"
              ]
