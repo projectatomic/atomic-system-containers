@@ -15,6 +15,7 @@ WorkingDirectory=$DESTDIR
 RuntimeDirectory=${NAME}
 Type=dbus
 BusName=org.fedoraproject.FirewallD1
+KillMode=none
 
 [Install]
 WantedBy=multi-user.target

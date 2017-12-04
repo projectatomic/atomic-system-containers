@@ -324,6 +324,16 @@
 				"rw",
 				"mode=755"
 			]
+		},
+		{
+			"type": "bind",
+			"source": "/usr/lib/modules",
+			"destination": "/usr/lib/modules",
+			"options": [
+				"rbind",
+				"ro",
+				"rslave"
+			]
 		}
 	]
 }

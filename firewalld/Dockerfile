@@ -20,18 +20,16 @@ RUN dnf install --setopt=tsflags=nodocs -y firewalld kmod && \
     mkdir -p /exports/hostfs/etc/{sysconfig,firewalld} && \
     mkdir -p /exports/hostfs/usr/local/share/polkit-1/actions && \
     mkdir -p /exports/hostfs/etc/dbus-1/system.d && \
+
     cp /etc/sysconfig/firewalld /exports/hostfs/etc/sysconfig && \
-    # Copy all the polkit related files into current polkit
+    # Copy all the polkit related policy file into a substitute folder '/usr/local/share' as other /usr parts are read only
     cp /usr/share/polkit-1/actions/org.fedoraproject.FirewallD1.* /exports/hostfs/usr/local/share/polkit-1/actions && \
     # Copy entire firewalld related configuration file into host
     cp -r /etc/firewalld/* /exports/hostfs/etc/firewalld && \
-    # Copy the dbus configuration file into the host
+    # Copy the dbus configuration file into the host, as we are using host's dbus socket
     cp /etc/dbus-1/system.d/FirewallD.conf /exports/hostfs/etc/dbus-1/system.d && \
     # We need /var/log/firewalld for firewalld to write messages
     touch /exports/hostfs/var/log/firewalld
-
-# Copy the associated binaries to the corresponding location, because firewalld going to use them
-RUN  cp -r /usr/lib/firewalld/* /exports/hostfs/etc/firewalld
 
 COPY run.sh /usr/bin/
 
