@@ -13,16 +13,16 @@ LABEL com.redhat.component="firewalld" \
       maintainer="Rui xin Bao <rubao@redhat.com>" \
       atomic.type="system"
 
-RUN dnf install --setopt=tsflags=nodocs -y firewalld && \
-    rpm -V firewalld && \
+RUN dnf install --setopt=tsflags=nodocs -y firewalld kmod && \
+    rpm -V firewalld kmod && \
     dnf clean all && \
     mkdir -p /exports/hostfs/var/log/ && \
     mkdir -p /exports/hostfs/etc/{sysconfig,firewalld} && \
-    mkdir -p /exports/hostfs/usr/share/polkit-1/actions && \
+    mkdir -p /exports/hostfs/usr/local/share/polkit-1/actions && \
     mkdir -p /exports/hostfs/etc/dbus-1/system.d && \
     cp /etc/sysconfig/firewalld /exports/hostfs/etc/sysconfig && \
     # Copy all the polkit related files into current polkit
-    cp /usr/share/polkit-1/actions/org.fedoraproject.FirewallD1.* /exports/hostfs/usr/share/polkit-1/actions && \
+    cp /usr/share/polkit-1/actions/org.fedoraproject.FirewallD1.* /exports/hostfs/usr/local/share/polkit-1/actions && \
     # Copy entire firewalld related configuration file into host
     cp -r /etc/firewalld/* /exports/hostfs/etc/firewalld && \
     # Copy the dbus configuration file into the host
@@ -31,12 +31,7 @@ RUN dnf install --setopt=tsflags=nodocs -y firewalld && \
     touch /exports/hostfs/var/log/firewalld
 
 # Copy the associated binaries to the corresponding location, because firewalld going to use them
-RUN mkdir -p /exports/hostfs/sbin && \
-    mkdir -p /exports/hostfs/usr/sbin && \
-    mkdir -p /exports/hostfs/usr/lib/firewalld && \
-    cp -r /usr/lib/firewalld/* /exports/hostfs/usr/lib/firewalld && \
-    cp /usr/sbin/ebtables /exports/hostfs/usr/sbin/ && \
-    cp /usr/sbin/ipset /exports/hostfs/sbin/
+RUN  cp -r /usr/lib/firewalld/* /exports/hostfs/etc/firewalld
 
 COPY run.sh /usr/bin/
 
