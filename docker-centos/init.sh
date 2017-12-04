@@ -35,7 +35,7 @@ do
       sleep 0.1
 done
 
-exec /usr/bin/docker-current daemon \
+exec /usr/bin/dockerd-current \
           --config-file=/etc/docker/container-daemon.json \
           --userland-proxy-path=/usr/libexec/docker/docker-proxy-current \
           $OPTIONS \
