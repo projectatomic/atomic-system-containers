@@ -40,6 +40,13 @@ Or alternatively, without specifying Registry, it will default to ostree image:
 # atomic install --system --system-package=no --name=firewalld firewalld
 ```
 
+Before you start the service, you need to reload dbus before it considers
+the new configuration. (make sure you are under root when execute this!)
+
+```
+killall -SIGHUP dbus-daemon
+```
+
 Start as a systemd service:
 
 ```
