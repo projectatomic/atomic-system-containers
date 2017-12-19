@@ -6,7 +6,10 @@
     },
     "process": {
         "terminal": false,
-        "user": {},
+        "user": {
+            "uid": 0,
+            "gid": 0
+        },
         "args": [
             "/usr/bin/kube-proxy-docker.sh"
         ],
