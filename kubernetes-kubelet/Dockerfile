@@ -18,8 +18,10 @@ LABEL RUN /usr/bin/docker run -d --privileged --net=host --pid=host -v /:/rootfs
 
 COPY launch.sh /usr/bin/kubelet-docker.sh
 
-COPY service.template config.json.template /exports/
+COPY tmpfiles.template service.template config.json.template /exports/
 
-RUN mkdir -p /exports/hostfs/etc/kubernetes && cp /etc/kubernetes/{config,kubelet} /exports/hostfs/etc/kubernetes
+RUN mkdir -p /exports/hostfs/etc/cni/net.d && \
+    mkdir -p /exports/hostfs/etc/kubernetes && \
+    cp /etc/kubernetes/{config,kubelet} /exports/hostfs/etc/kubernetes
 
 ENTRYPOINT ["/usr/bin/kubelet-docker.sh"]
