@@ -266,26 +266,24 @@
             ]
         },
         {
+            "type": "bind",
+            "source": "/sys",
             "destination": "/sys",
-            "type": "sysfs",
-            "source": "sysfs",
             "options": [
-                "nosuid",
-                "noexec",
-                "nodev"
+                "rbind",
+                "rw"
             ]
         },
         {
-            "destination": "/sys/fs/cgroup",
-            "type": "cgroup",
-            "source": "cgroup",
-            "options": [
-                "nosuid",
-                "noexec",
-                "nodev",
-                "relatime",
-                "ro"
-            ]
+          "type": "bind",
+          "source": "/etc/cni/net.d",
+          "destination": "/etc/cni/net.d",
+          "options": [
+              "bind",
+              "slave",
+              "rw",
+              "mode=777"
+          ]
         },
         {
             "type": "bind",
@@ -298,13 +296,30 @@
             ]
          },
          {
+           "type": "bind",
+           "source": "/etc/localtime",
+           "destination": "/etc/localtime",
+           "options": [
+               "rbind",
+               "ro"
+           ]
+         },
+	 {
+	    "type": "bind",
+	    "source": "/etc/pki",
+	    "destination": "/etc/pki",
+	    "options": [
+		"bind",
+		"ro"
+	    ]
+	 },
+         {
             "destination": "/etc/resolv.conf",
             "type": "bind",
             "source": "/etc/resolv.conf",
             "options": [
                 "ro",
-                "rbind",
-                "rprivate"
+                "bind"
              ]
           },
           {
@@ -319,8 +334,8 @@
           },
           {
             "type": "bind",
-            "source": "/var/run/",
-            "destination": "/var/run/",
+            "source": "/var/run/secrets",
+            "destination": "/var/run/secrets",
             "options": [
                 "rbind",
                 "rw",
@@ -329,7 +344,7 @@
           },
           {
             "type": "bind",
-            "source": "/run",
+            "source": "${RUN_DIRECTORY}",
             "destination": "/run",
             "options": [
                 "rbind",
@@ -339,7 +354,7 @@
           },
           {
             "type": "bind",
-            "source": "/var/lib",
+            "source": "${STATE_DIRECTORY}",
             "destination": "/var/lib",
             "options": [
                 "bind",
@@ -349,7 +364,7 @@
           },
           {
             "type": "bind",
-            "source": "/var/lib/kubelet",
+            "source": "${STATE_DIRECTORY}/kubelet",
             "destination": "/var/lib/kubelet",
             "options": [
                 "rbind",
@@ -367,6 +382,15 @@
                 "rw",
                 "mode=755"
              ]
+          },
+          {
+            "destination": "/tmp",
+       	    "type": "tmpfs",
+       	    "source": "tmpfs",
+       	    "options": [
+                "mode=755",
+                "size=65536k"
+            ]
           }
     ],
     "linux": {
