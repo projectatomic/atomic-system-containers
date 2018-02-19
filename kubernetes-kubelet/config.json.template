@@ -392,6 +392,7 @@
                 "size=65536k"
             ]
           }
+          $ADDTL_MOUNTS
     ],
     "linux": {
         "rootfsPropagation": "rslave",
