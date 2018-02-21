@@ -12,4 +12,5 @@ RUN mkdir /exports /host && \
 # system container
 COPY config.json.template /exports/
 
-CMD ["/usr/bin/false"]
+CMD ["--help"]
+ENTRYPOINT ["/usr/bin/buildah"]
