@@ -374,6 +374,16 @@
 	    "options": [
 		"private"
 	    ]
+	},
+	{
+	    "source": "/etc",
+	    "destination": "/etc",
+	    "type": "bind",
+	    "options": [
+                "rbind",
+		"slave",
+                "ro"
+	    ]
 	}
     ],
     "hooks": {},
