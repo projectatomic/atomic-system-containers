@@ -384,6 +384,16 @@
 		"slave",
                 "ro"
 	    ]
+	},
+	{
+	    "source": "/var/run/NetworkManager",
+	    "destination": "/var/run/NetworkManager",
+	    "type": "bind",
+	    "options": [
+                "rbind",
+		"slave",
+                "ro"
+	    ]
 	}
     ],
     "hooks": {},
