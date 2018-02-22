@@ -6,7 +6,7 @@ LABEL com.redhat.component="buildah" \
       atomic.type="system"
 
 RUN mkdir /exports /host && \
-    dnf install --setopt=tsflags=nodocs -y buildah && \
+    dnf install --setopt=tsflags=nodocs -y buildah bwrap-oci && \
     dnf clean all
 
 # system container
