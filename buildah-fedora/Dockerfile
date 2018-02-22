@@ -10,7 +10,7 @@ RUN mkdir /exports /host && \
     dnf clean all
 
 # system container
-COPY config.json.template /exports/
+COPY config.json.template tmpfiles.template /exports/
 
 CMD ["--help"]
 ENTRYPOINT ["/usr/bin/buildah"]
