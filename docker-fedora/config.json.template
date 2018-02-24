@@ -367,6 +367,7 @@
 		"private"
 	    ]
 	}
+        $ADDTL_MOUNTS
     ],
     "hooks": {},
     "linux": {
