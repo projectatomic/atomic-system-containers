@@ -286,6 +286,17 @@
 	},
 	{
 	    "type": "bind",
+	    "source": "/opt",
+	    "destination": "/opt",
+	    "options": [
+		"rbind",
+		"rslave",
+		"rw",
+		"mode=755"
+	    ]
+	},
+	{
+	    "type": "bind",
 	    "source": "/mnt",
 	    "destination": "/mnt",
 	    "options": [
