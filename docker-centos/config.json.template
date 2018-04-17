@@ -343,6 +343,16 @@
 		"mode=755"
 	    ]
 	},
+        {
+            "destination": "/host",
+            "options": [
+                "rbind",
+                "rshared",
+                "rw"
+            ],
+            "source": "/",
+            "type": "bind"
+        },
 	{
 	    "source": "/sys",
 	    "destination": "/sys",

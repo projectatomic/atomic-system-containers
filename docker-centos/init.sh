@@ -36,6 +36,7 @@ do
 done
 
 exec /usr/bin/dockerd-current \
+          --bind-mount-prefix=/host \
           --config-file=/etc/docker/container-daemon.json \
           --userland-proxy-path=/usr/libexec/docker/docker-proxy-current \
           $OPTIONS \
