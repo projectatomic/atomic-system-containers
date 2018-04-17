@@ -38,6 +38,7 @@ do
 done
 
 exec /usr/bin/dockerd-current \
+     --bind-mount-prefix=/host \
      --config-file=/etc/docker/container-daemon.json \
      $OPTIONS \
      $DOCKER_STORAGE_OPTIONS \
