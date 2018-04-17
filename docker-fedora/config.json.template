@@ -348,6 +348,16 @@
 		"rw"
 	    ]
 	},
+        {
+            "destination": "/host",
+            "options": [
+                "rbind",
+                "rshared",
+                "rw"
+            ],
+            "source": "/",
+            "type": "bind"
+        },
 	{
 	    "source": "/dev",
 	    "destination": "/dev",
