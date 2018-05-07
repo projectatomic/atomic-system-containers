@@ -296,6 +296,16 @@
             ]
          },
          {
+            "type": "bind",
+            "source": "/dev/disk",
+            "destination": "/dev/disk",
+            "options": [
+                "rbind",
+                "ro",
+                "rprivate"
+            ]
+         },
+         {
            "type": "bind",
            "source": "/etc/localtime",
            "destination": "/etc/localtime",
