@@ -1,0 +1,23 @@
+[Unit]
+Description=firewalld - dynamic firewall daemon
+Before=network-pre.target
+Wants=network-pre.target
+After=dbus.service
+After=polkit.service
+Requires=dbus.service
+Wants=polkit.service
+Conflicts=iptables.service ip6tables.service ebtables.service ipset.service
+
+[Service]
+EnvironmentFile=-/etc/sysconfig/firewalld
+ExecStart=$EXEC_START
+ExecStop=$EXEC_STOP
+Restart=on-failure
+WorkingDirectory=$DESTDIR
+RuntimeDirectory=${NAME}
+Type=dbus
+BusName=org.fedoraproject.FirewallD1
+KillMode=none
+
+[Install]
+WantedBy=multi-user.target
