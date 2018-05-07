@@ -51,7 +51,7 @@ Uninstalling open-vm-tools-centos container on atomic host:
 Pull from local docker into ostree:
 
 ```
-# atomic pull --storage ostree docker:open-vm-tools-centos
+# atomic pull --storage ostree docker:open-vm-tools-centos:lastest
 ```
 
 Install the container:
